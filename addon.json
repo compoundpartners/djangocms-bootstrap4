@@ -1,5 +1,5 @@
 {
-    "package-name": "djangocms-bootstrap4",
+    "package-name": "js-bootstrap4",
     "installed-apps": [
         "djangocms_link",
         "djangocms_picture",

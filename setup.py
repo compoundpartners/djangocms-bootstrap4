@@ -37,7 +37,7 @@ CLASSIFIERS = [
 
 
 setup(
-    name='djangocms-bootstrap4',
+    name='js-bootstrap4',
     version=__version__,
     author='Divio AG',
     author_email='info@divio.ch',
