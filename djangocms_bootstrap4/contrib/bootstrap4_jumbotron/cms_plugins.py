@@ -18,7 +18,7 @@ class Bootstrap4JumbotronPlugin(CMSPluginBase):
     https://getbootstrap.com/docs/4.0/components/jumbotron/
     """
     model = Bootstrap4Jumbotron
-    name = _('Jumbotron')
+    name = _('Boxout')
     module = _('Bootstrap 4')
     render_template = 'djangocms_bootstrap4/jumbotron.html'
     change_form_template = 'djangocms_bootstrap4/admin/jumbotron.html'
