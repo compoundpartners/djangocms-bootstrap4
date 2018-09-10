@@ -18,7 +18,7 @@ class Bootstrap4CtaPlugin(CMSPluginBase):
     https://getbootstrap.com/docs/4.0/components/cta/
     """
     model = Bootstrap4Cta
-    name = _('Boxout')
+    name = _('Call To Action')
     module = _('Bootstrap 4')
     render_template = 'djangocms_bootstrap4/cta.html'
     change_form_template = 'djangocms_bootstrap4/admin/cta.html'
