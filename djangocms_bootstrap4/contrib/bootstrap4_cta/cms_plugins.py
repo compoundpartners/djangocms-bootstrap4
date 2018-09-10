@@ -23,6 +23,7 @@ class Bootstrap4CtaPlugin(CMSPluginBase):
     render_template = 'djangocms_bootstrap4/cta.html'
     change_form_template = 'djangocms_bootstrap4/admin/cta.html'
     allow_children = True
+    child_classes = ['TextPlugin', 'Bootstrap4LinkPlugin']
 
     fieldsets = [
         (None, {
