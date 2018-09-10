@@ -17,6 +17,8 @@ HELPER_SETTINGS = {
         'djangocms_bootstrap4.contrib.bootstrap4_collapse',
         'djangocms_bootstrap4.contrib.bootstrap4_grid',
         'djangocms_bootstrap4.contrib.bootstrap4_jumbotron',
+        'djangocms_bootstrap4.contrib.bootstrap4_cta',
+        'djangocms_bootstrap4.contrib.bootstrap4_boxout',
         'djangocms_bootstrap4.contrib.bootstrap4_link',
         'djangocms_bootstrap4.contrib.bootstrap4_listgroup',
         'djangocms_bootstrap4.contrib.bootstrap4_media',
