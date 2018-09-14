@@ -1,7 +1,7 @@
 {% load i18n cms_tags %}
 
 <blockquote {{ instance.attributes_str }}>
-    {{ instance.quote_content }}
+    <span>{{ instance.quote_content }}</span>
     {% if instance.quote_origin %}
         <footer class="blockquote-footer">
             <cite title="{{ instance.quote_origin }}">{{ instance.quote_origin }}</cite>
