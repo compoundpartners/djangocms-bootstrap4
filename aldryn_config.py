@@ -28,6 +28,10 @@ class Form(forms.BaseForm):
         required=False,
         initial=True,
     )
+    available_colors = forms.CharField(
+        'Available colors',
+        required=False,
+    )
 
     def to_settings(self, data, settings):
         if data['grid_size']:
@@ -44,5 +48,8 @@ class Form(forms.BaseForm):
 
         if data['enable_boxout']:
             settings['DJANGOCMS_BOOTSTRAP4_USE_BOXOUT'] = int(data['enable_boxout'])
+
+        if data['available_colors']:
+            settings['DJANGOCMS_BOOTSTRAP4_AVAILABLE_COLORS'] = data['available_colors'].split(",")
 
         return settings
