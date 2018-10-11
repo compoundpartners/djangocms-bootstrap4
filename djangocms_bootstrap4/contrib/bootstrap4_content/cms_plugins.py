@@ -57,7 +57,8 @@ class Bootstrap4BlockquotePlugin(CMSPluginBase):
     fieldsets = [
         (None, {
             'fields': (
-                ('quote_content', 'quote_origin'),
+                'quote_content',
+                ('quote_origin_name', 'quote_origin_role', 'quote_origin_company',),
                 'quote_alignment',
             )
         }),

@@ -46,9 +46,20 @@ class Bootstrap4Blockquote(CMSPlugin):
     quote_content = models.TextField(
         verbose_name=_('Quote'),
     )
-    quote_origin = models.TextField(
-        verbose_name=_('Cite'),
+    quote_origin_name = models.CharField(
+        verbose_name=_('Name'),
         blank=True,
+        max_length=255,
+    )
+    quote_origin_role = models.CharField(
+        verbose_name=_('Role'),
+        blank=True,
+        max_length=255,
+    )
+    quote_origin_company = models.CharField(
+        verbose_name=_('Company'),
+        blank=True,
+        max_length=255,
     )
     quote_alignment = models.CharField(
         verbose_name=_('Alignment'),

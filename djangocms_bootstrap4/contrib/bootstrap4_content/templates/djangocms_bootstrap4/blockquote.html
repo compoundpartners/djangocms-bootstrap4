@@ -2,9 +2,11 @@
 
 <blockquote {{ instance.attributes_str }}>
     <span>{{ instance.quote_content }}</span>
-    {% if instance.quote_origin %}
+    {% if instance.quote_origin_name or instance.quote_origin_role or instance.quote_origin_company %}
         <footer class="blockquote-footer">
-            <cite title="{{ instance.quote_origin }}">{{ instance.quote_origin }}</cite>
+            <cite title="{{ instance.quote_origin_name }}, {{ instance.quote_origin_role }}, {{ instance.quote_origin_company }}">
+                {{ instance.quote_origin_name }}, {{ instance.quote_origin_role }}, {{ instance.quote_origin_company }}
+            </cite>
         </footer>
     {% endif %}
 </blockquote>
