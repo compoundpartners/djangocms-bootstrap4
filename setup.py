@@ -13,6 +13,7 @@ REQUIREMENTS = [
     'djangocms-icon>=1.0.0',
     'djangocms-link>=2.1.0',
     'djangocms-picture>=2.0.6',
+    'aldryn-google-tag-manager',
 ]
 
 
