@@ -130,6 +130,7 @@ class Bootstrap4CarouselSlide(AbstractLink, CMSPlugin):
         default='',
         help_text=_('Content may also be added using child plugins.'),
     )
+    link = models.CharField(verbose_name=_('Link'), blank=True, max_length=2040)
     tag_type = TagTypeField()
 
     def __str__(self):

@@ -83,7 +83,7 @@ class Bootstrap4CarouselSlidePlugin(CMSPluginBase):
         (_('Link settings'), {
             'classes': ('collapse',),
             'fields': (
-                ('external_link', 'internal_link'),
+                ('link', 'internal_link'),
                 ('mailto', 'phone'),
                 ('anchor', 'target'),
             )
@@ -110,6 +110,8 @@ class Bootstrap4CarouselSlidePlugin(CMSPluginBase):
 
         context['instance'] = instance
         context['link'] = instance.get_link()
+        if not context['link']:
+            context['link'] = instance.link
         context['options'] = {
             'crop': 10,
             'size': (width, height),
