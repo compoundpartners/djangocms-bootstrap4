@@ -5,23 +5,26 @@
 
 <script>
   {% if instance.external_link %}
-  dataLayer = [{
+  var dataLayer = window.dataLayer = window.dataLayer || [];
+  dataLayer.push({
       "eventCategory": "Link/Button",
       "eventAction": "Link",
       "eventLabel": "{{ instance.external_link }}"
-  }];
+  });
   {% elif instance.mailto %}
-  dataLayer = [{
+  var dataLayer = window.dataLayer = window.dataLayer || [];
+  dataLayer.push({
       "eventCategory": "Link/Button",
       "eventAction": "Contact",
       "eventLabel": "{{ instance.mailto }}"
-  }];
+  });
   {% elif instance.phone %}
-  dataLayer = [{
+  var dataLayer = window.dataLayer = window.dataLayer || [];
+  dataLayer.push({
       "eventCategory": "Link/Button",
       "eventAction": "Call",
       "eventLabel": "{{ article.title }}"
-  }];
+  });
   {% endif %}
 </script>
 {% google_tag_manager %}
