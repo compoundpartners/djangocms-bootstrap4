@@ -11,7 +11,7 @@ from djangocms_link.models import AbstractLink
 from djangocms_icon.fields import Icon
 from djangocms_bootstrap4.constants import COLOR_STYLE_CHOICES
 
-from .constants import LINK_CHOICES, LINK_SIZE_CHOICES
+from .constants import LINK_CHOICES, LINK_SIZE_CHOICES, LINK_ALIGNMENTS
 
 
 # 'link' type is added manually as it is only required for this plugin
@@ -42,6 +42,12 @@ class Bootstrap4Link(AbstractLink):
     link_size = models.CharField(
         verbose_name=_('Size'),
         choices=LINK_SIZE_CHOICES,
+        blank=True,
+        max_length=255,
+    )
+    link_alignment = models.CharField(
+        verbose_name=_('Alignment'),
+        choices=LINK_ALIGNMENTS,
         blank=True,
         max_length=255,
     )

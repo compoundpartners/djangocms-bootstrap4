@@ -30,6 +30,7 @@ class Bootstrap4LinkPlugin(LinkPlugin):
     fields = (
         ('name', 'link_type'),
         ('external_link', 'internal_link'),
+        ('link_alignment',),
         ('link_context', 'link_size'),
         ('link_outline', 'link_block'),
     )
@@ -71,6 +72,8 @@ class Bootstrap4LinkPlugin(LinkPlugin):
             link_classes.append(instance.link_size);
         if instance.link_block:
             link_classes.append('btn-block');
+        if instance.link_alignment:
+            link_classes.append(instance.link_alignment);
 
         classes = concat_classes(link_classes + [
             instance.attributes.get('class'),

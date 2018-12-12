@@ -21,3 +21,10 @@ USE_LINK_ICONS = getattr(
     'DJANGOCMS_BOOTSTRAP4_USE_ICONS',
     True,
 )
+
+LINK_ALIGNMENTS = (
+    ('', _('None')),
+    ('text-left', _('Left')),
+    ('text-centre', _('Center')),
+    ('text-right', _('Right')),
+)
