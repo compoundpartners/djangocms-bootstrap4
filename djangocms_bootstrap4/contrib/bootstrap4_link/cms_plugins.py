@@ -80,6 +80,10 @@ class Bootstrap4LinkPlugin(LinkPlugin):
         ])
         instance.attributes['class'] = classes
 
+        # Check if (Aldryn) Google Tag Manager (GTM) is installed, and pass to template
+        if 'aldryn_google_tag_manager' in settings.INSTALLED_APPS:
+            context['gtm_installed'] = True
+
         return super(Bootstrap4LinkPlugin, self).render(
             context, instance, placeholder
         )
