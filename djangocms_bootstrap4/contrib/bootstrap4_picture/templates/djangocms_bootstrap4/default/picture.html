@@ -1,4 +1,8 @@
-{% load thumbnail google_tag_manager_tags %}
+{% load thumbnail %}
+
+{% if gtm_installed %}
+    {% load google_tag_manager_tags %}
+{% endif %}
 
 {% if picture_link %}
     <a href="{{ picture_link }}"
@@ -71,17 +75,19 @@
     {% endfor %}
 {% endcomment %}
 
-{# Google Tag Manager #}
-<script>
-    var dataLayer = window.dataLayer = window.dataLayer || [];
-    dataLayer.push({
-        "eventCategory": "Picture/Image",
-        "eventAction": "Link",
-        {% if picture_link %}
-        "eventLabel": "{{ picture_link }}"
-        {% else %}
-        "eventLabel": ""
-        {% endif %}
-    });
-</script>
-{% google_tag_manager %}
+{% if gtm_installed %}
+    {# Google Tag Manager #}
+    <script>
+        var dataLayer = window.dataLayer = window.dataLayer || [];
+        dataLayer.push({
+            "eventCategory": "Picture/Image",
+            "eventAction": "Link",
+            {% if picture_link %}
+            "eventLabel": "{{ picture_link }}"
+            {% else %}
+            "eventLabel": ""
+            {% endif %}
+        });
+    </script>
+    {% google_tag_manager %}
+{% endif %}
