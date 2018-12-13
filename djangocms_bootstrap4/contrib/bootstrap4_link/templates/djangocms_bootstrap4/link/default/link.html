@@ -1,7 +1,7 @@
-{% load cms_tags %}
+{% load friendly_loader cms_tags %}
 
 {% if gtm_installed %}
-    {% load google_tag_manager_tags %}
+    {% friendly_load google_tag_manager_tags %}
 {% endif %}
 
 {% spaceless %}
@@ -35,5 +35,7 @@
     });
     {% endif %}
   </script>
+  {% if_has_tag google_tag_manager %}
   {% google_tag_manager %}
+  {% endif_has_tag %}
 {% endif %}
