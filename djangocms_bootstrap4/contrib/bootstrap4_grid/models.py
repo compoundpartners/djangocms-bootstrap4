@@ -8,6 +8,9 @@ from django.utils.encoding import python_2_unicode_compatible
 from django.utils.translation import ugettext, ungettext, ugettext_lazy as _
 
 from cms.models import CMSPlugin
+from js_color_picker.fields import RGBColorField
+from djangocms_icon.fields import Icon
+from filer.fields.image import FilerImageField
 
 from djangocms_bootstrap4.constants import DEVICE_SIZES
 from djangocms_bootstrap4.fields import (
@@ -90,6 +93,32 @@ class Bootstrap4GridRow(CMSPlugin):
     )
     tag_type = TagTypeField()
     attributes = AttributesField()
+    background_color = RGBColorField(
+        verbose_name=_('Background Color'),
+        blank=True,
+        null=True
+    )
+    background_image = FilerImageField(
+        verbose_name=_('Background Image'),
+        null=True,
+        blank=True,
+        related_name='row_bg_image'
+    )
+    icon = Icon(
+        verbose_name=_('Icon'),
+        null=True,
+        blank=True
+    )
+    title = models.CharField(
+        verbose_name=_('Title'),
+        null=True,
+        blank=True,
+        max_length=255,
+    )
+    display_title = models.BooleanField(
+        verbose_name=_('Display Title'),
+        default=False,
+    )
 
     def __str__(self):
         return str(self.pk)
@@ -144,6 +173,27 @@ class Bootstrap4GridColumn(CMSPlugin):
     )
     tag_type = TagTypeField()
     attributes = AttributesField()
+    background_color = RGBColorField(
+        verbose_name=_('Background Color'),
+        blank=True,
+        null=True
+    )
+    background_image = FilerImageField(
+        verbose_name=_('Background Image'),
+        null=True,
+        blank=True,
+        related_name='col_bg_image'
+    )
+    title = models.CharField(
+        verbose_name=_('Title'),
+        null=True,
+        blank=True,
+        max_length=255,
+    )
+    display_title = models.BooleanField(
+        verbose_name=_('Display Title'),
+        default=False,
+    )
 
     def __str__(self):
         return str(self.pk)

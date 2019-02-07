@@ -1,6 +1,12 @@
 {% load cms_tags %}
 
 <{{ instance.tag_type }} {{ instance.attributes_str }}>
+    {% if instance.display_title %}
+        <h2>
+            {% if instance.icon %}{% with icon_class=instance.icon instance=instance.icon %}{% include "djangocms_icon/includes/icon.html" %}{% endwith %}{% endif %}{% for plugin in instance.child_plugin_instances %}{% render_plugin plugin %}{% empty %}{{ instance.name }}{% endfor %}{% if instance.icon_right %}{% with icon_class=instance.icon_right instance=instance.icon_right %}{% include "djangocms_icon/includes/icon.html" %}{% endwith %}{% endif %}
+            {{ instance.title }}
+        </h2>
+    {% endif %}
     {% for plugin in instance.child_plugin_instances %}
         {% with forloop as parentloop %}{% render_plugin plugin %}{% endwith %}
     {% endfor %}

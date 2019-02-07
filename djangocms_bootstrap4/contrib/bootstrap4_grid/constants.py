@@ -56,3 +56,29 @@ GRID_COLUMN_CHOICES = getattr(
         ('', _('Empty'))
     ),
 )
+
+GRID_USE_ROW_BG_COLOR = getattr(
+    settings,
+    'DJANGOCMS_BOOTSTRAP4_USE_ROW_BG_COLOR',
+    True,
+)
+GRID_USE_ROW_BG_IMAGE = getattr(
+    settings,
+    'DJANGOCMS_BOOTSTRAP4_USE_ROW_BG_IMAGE',
+    True,
+)
+GRID_USE_ROW_BG_ICON = getattr(
+    settings,
+    'DJANGOCMS_BOOTSTRAP4_USE_ROW_BG_ICON',
+    True,
+)
+GRID_USE_COL_BG_COLOR = getattr(
+    settings,
+    'DJANGOCMS_BOOTSTRAP4_USE_COL_BG_COLOR',
+    True,
+)
+GRID_USE_COL_BG_IMAGE = getattr(
+    settings,
+    'DJANGOCMS_BOOTSTRAP4_USE_COL_BG_IMAGE',
+    True,
+)

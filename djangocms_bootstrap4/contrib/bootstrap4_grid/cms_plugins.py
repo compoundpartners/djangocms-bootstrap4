@@ -19,7 +19,13 @@ from .forms import (
     Bootstrap4GridRowForm,
     Bootstrap4GridColumnForm,
 )
-
+from .constants import(
+    GRID_USE_ROW_BG_COLOR,
+    GRID_USE_ROW_BG_IMAGE,
+    GRID_USE_ROW_BG_ICON,
+    GRID_USE_COL_BG_COLOR,
+    GRID_USE_COL_BG_IMAGE,
+)
 
 class Bootstrap4GridContainerPlugin(CMSPluginBase):
     """
@@ -65,13 +71,33 @@ class Bootstrap4GridRowPlugin(CMSPluginBase):
     https://getbootstrap.com/docs/4.0/layout/grid/
     """
     model = Bootstrap4GridRow
-    name = _('Row')
+    name = _('Column Wrapper')
     module = _('Bootstrap 4')
     form = Bootstrap4GridRowForm
     change_form_template = 'djangocms_bootstrap4/admin/grid_row.html'
     render_template = 'djangocms_bootstrap4/grid_row.html'
     allow_children = True
     child_classes = ['Bootstrap4GridColumnPlugin']
+
+    advanced_fields = (
+        ('tag_type', 'gutters',),
+        ('title', 'display_title'),
+    )
+    if GRID_USE_ROW_BG_COLOR:
+        advanced_fields +=(
+            'background_color',
+        )
+    if GRID_USE_ROW_BG_IMAGE:
+        advanced_fields +=(
+            'background_image',
+        )
+    if GRID_USE_ROW_BG_ICON:
+        advanced_fields +=(
+            'icon',
+        )
+    advanced_fields +=(
+        'attributes',
+    )
 
     fieldsets = [
         (None, {
@@ -82,10 +108,7 @@ class Bootstrap4GridRowPlugin(CMSPluginBase):
         }),
         (_('Advanced settings'), {
             'classes': ('collapse',),
-            'fields': (
-                ('tag_type', 'gutters',),
-                'attributes',
-            )
+            'fields': advanced_fields,
         }),
     ]
 
@@ -118,6 +141,10 @@ class Bootstrap4GridRowPlugin(CMSPluginBase):
             instance.attributes.get('class'),
         ])
         instance.attributes['class'] = classes
+        if instance.background_color or instance.background_image:
+            color_str = ' %s' % instance.background_color if instance.background_color else ''
+            img_str = ' url(%s)' % instance.background_image.url if instance.background_image else ''
+            instance.attributes['style'] = 'background:%s%s;' % (color_str, img_str)
 
         return super(Bootstrap4GridRowPlugin, self).render(
             context, instance, placeholder
@@ -141,6 +168,21 @@ class Bootstrap4GridColumnPlugin(CMSPluginBase):
     # https://getbootstrap.com/docs/4.0/layout/grid/#column-resets
     parent_classes = ['Bootstrap4GridRowPlugin']
 
+    advanced_fields = (
+        'tag_type',
+        ('title', 'display_title'),
+    )
+    if GRID_USE_COL_BG_COLOR:
+        advanced_fields +=(
+            'background_color',
+        )
+    if GRID_USE_COL_BG_IMAGE:
+        advanced_fields +=(
+            'background_image',
+        )
+    advanced_fields +=(
+        'attributes',
+    )
     fieldsets = [
         (None, {
             'fields': (
@@ -159,10 +201,7 @@ class Bootstrap4GridColumnPlugin(CMSPluginBase):
         }),
         (_('Advanced settings'), {
             'classes': ('collapse',),
-            'fields': (
-                'tag_type',
-                'attributes',
-            )
+            'fields': advanced_fields
         }),
     ]
 
@@ -182,6 +221,10 @@ class Bootstrap4GridColumnPlugin(CMSPluginBase):
             instance.attributes.get('class'),
         ])
         instance.attributes['class'] = attr_classes
+        if instance.background_color or instance.background_image:
+            color_str = ' %s' % instance.background_color if instance.background_color else ''
+            img_str = ' url(%s)' % instance.background_image.url if instance.background_image else ''
+            instance.attributes['style'] = 'background:%s%s;' % (color_str, img_str)
 
         return super(Bootstrap4GridColumnPlugin, self).render(
             context, instance, placeholder

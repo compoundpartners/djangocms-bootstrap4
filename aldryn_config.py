@@ -32,6 +32,31 @@ class Form(forms.BaseForm):
         'Available colors',
         required=False,
     )
+    enable_row_bg_color = forms.CheckboxField(
+        'Enable row background color',
+        required=False,
+        initial=True,
+    )
+    enable_row_bg_image = forms.CheckboxField(
+        'Enable row background image',
+        required=False,
+        initial=True,
+    )
+    enable_row_icon = forms.CheckboxField(
+        'Enable row icon',
+        required=False,
+        initial=True,
+    )
+    enable_col_bg_color = forms.CheckboxField(
+        'Enable col background color',
+        required=False,
+        initial=True,
+    )
+    enable_col_bg_image = forms.CheckboxField(
+        'Enable col background image',
+        required=False,
+        initial=True,
+    )
 
     def to_settings(self, data, settings):
         if data['grid_size']:
@@ -51,5 +76,24 @@ class Form(forms.BaseForm):
 
         if data['available_colors']:
             settings['DJANGOCMS_BOOTSTRAP4_AVAILABLE_COLORS'] = data['available_colors'].split(",")
+
+        if data['available_colors']:
+            settings['DJANGOCMS_BOOTSTRAP4_USE_'] = data['available_colors'].split(",")
+
+        if data['enable_row_bg_color']:
+            settings['DJANGOCMS_BOOTSTRAP4_USE_ROW_BG_COLOR'] = int(data['enable_row_bg_color'])
+
+        if data['enable_row_bg_image']:
+            settings['DJANGOCMS_BOOTSTRAP4_USE_ROW_BG_IMAGE'] = int(data['enable_row_bg_image'])
+
+        if data['enable_row_icon']:
+            settings['DJANGOCMS_BOOTSTRAP4_USE_ROW_BG_ICON'] = int(data['enable_row_icon'])
+
+        if data['enable_col_bg_color']:
+            settings['DJANGOCMS_BOOTSTRAP4_USE_COL_BG_COLOR'] = int(data['enable_col_bg_color'])
+
+        if data['enable_col_bg_image']:
+            settings['DJANGOCMS_BOOTSTRAP4_USE_COL_BG_IMAGE'] = int(data['enable_col_bg_image'])
+
 
         return settings
