@@ -35,6 +35,7 @@ class Bootstrap4BoxoutPlugin(CMSPluginBase):
             'classes': ('collapse',),
             'fields': (
                 'tag_type',
+                'background_color',
                 'attributes',
             )
         }),
@@ -49,6 +50,8 @@ class Bootstrap4BoxoutPlugin(CMSPluginBase):
             instance.attributes.get('class'),
         ])
         instance.attributes['class'] = classes
+        if instance.background_color:
+            instance.attributes['style'] = 'background: %s;' % instance.background_color
 
         return super(Bootstrap4BoxoutPlugin, self).render(
             context, instance, placeholder

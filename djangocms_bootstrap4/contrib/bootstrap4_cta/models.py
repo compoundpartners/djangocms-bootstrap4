@@ -6,6 +6,7 @@ from django.utils.encoding import python_2_unicode_compatible
 from django.utils.translation import ugettext_lazy as _
 
 from cms.models import CMSPlugin
+from js_color_picker.fields import RGBColorField
 
 from djangocms_bootstrap4.fields import TagTypeField, AttributesField
 
@@ -22,6 +23,11 @@ class Bootstrap4Cta(CMSPlugin):
         help_text=_('Adds the .cta-fluid class.'),
     )
     tag_type = TagTypeField()
+    background_color = RGBColorField(
+        verbose_name=_('Background Color'),
+        blank=True,
+        null=True
+    )
     attributes = AttributesField()
 
     def __str__(self):
