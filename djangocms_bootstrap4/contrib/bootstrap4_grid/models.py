@@ -86,6 +86,10 @@ class Bootstrap4GridRow(CMSPlugin):
                 .format(link='https://getbootstrap.com/docs/4.0/layout/grid/#horizontal-alignment')
         ),
     )
+    full_width = models.BooleanField(
+        verbose_name=_('Show Full Width'),
+        default=False,
+    )
     gutters = models.BooleanField(
         verbose_name=_('Remove gutters'),
         default=False,
@@ -103,6 +107,10 @@ class Bootstrap4GridRow(CMSPlugin):
         null=True,
         blank=True,
         related_name='row_bg_image'
+    )
+    parallax = models.BooleanField(
+        verbose_name=_('Parallax'),
+        default=False,
     )
     icon = Icon(
         verbose_name=_('Icon'),

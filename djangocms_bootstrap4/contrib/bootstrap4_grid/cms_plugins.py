@@ -79,32 +79,32 @@ class Bootstrap4GridRowPlugin(CMSPluginBase):
     allow_children = True
     child_classes = ['Bootstrap4GridColumnPlugin']
 
-    advanced_fields = (
-        ('tag_type', 'gutters',),
+    main_fields = (
+        'create',
+        ('vertical_alignment', 'horizontal_alignment'),
+        'full_width',
         ('title', 'display_title'),
     )
     if GRID_USE_ROW_BG_COLOR:
-        advanced_fields +=(
+        main_fields +=(
             'background_color',
         )
     if GRID_USE_ROW_BG_IMAGE:
-        advanced_fields +=(
-            'background_image',
+        main_fields +=(
+            ('background_image', 'parallax'),
         )
     if GRID_USE_ROW_BG_ICON:
-        advanced_fields +=(
+        main_fields +=(
             'icon',
         )
-    advanced_fields +=(
+    advanced_fields = (
+        ('tag_type', 'gutters',),
         'attributes',
     )
 
     fieldsets = [
         (None, {
-            'fields': (
-                'create',
-                ('vertical_alignment', 'horizontal_alignment'),
-            )
+            'fields': main_fields,
         }),
         (_('Advanced settings'), {
             'classes': ('collapse',),
@@ -133,11 +133,15 @@ class Bootstrap4GridRowPlugin(CMSPluginBase):
 
     def render(self, context, instance, placeholder):
         gutter = 'no-gutters' if instance.gutters else ''
+        parallax = 'parallax' if instance.parallax else ''
+        full_width = 'full-width' if instance.full_width else ''
         classes = concat_classes([
             'row',
             instance.vertical_alignment,
             instance.horizontal_alignment,
             gutter,
+            parallax,
+            full_width,
             instance.attributes.get('class'),
         ])
         instance.attributes['class'] = classes
