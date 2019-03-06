@@ -32,6 +32,7 @@ class Bootstrap4CarouselPlugin(CMSPluginBase):
                 ('carousel_controls', 'carousel_indicators'),
                 ('carousel_keyboard', 'carousel_wrap'),
                 ('carousel_ride', 'carousel_pause'),
+                'full_width',
             )
         }),
         (_('Advanced settings'), {
@@ -52,8 +53,10 @@ class Bootstrap4CarouselPlugin(CMSPluginBase):
     def render(self, context, instance, placeholder):
         link_classes = ['carousel', 'slide']
 
+        full_width = 'full-width' if instance.full_width else ''
         classes = concat_classes(link_classes + [
             instance.attributes.get('class'),
+            full_width,
         ])
         instance.attributes['class'] = classes
 

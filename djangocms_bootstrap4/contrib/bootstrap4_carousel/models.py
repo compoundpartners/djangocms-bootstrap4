@@ -92,6 +92,10 @@ class Bootstrap4Carousel(CMSPlugin):
         help_text=_('Determines width and height of the image '
                     'according to the selected ratio.'),
     )
+    full_width = models.BooleanField(
+        verbose_name=_('Show Full Width'),
+        default=False,
+    )
     tag_type = TagTypeField()
     attributes = AttributesField(
         excluded_keys=[
