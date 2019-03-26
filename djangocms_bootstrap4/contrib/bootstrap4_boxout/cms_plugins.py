@@ -28,14 +28,14 @@ class Bootstrap4BoxoutPlugin(CMSPluginBase):
     fieldsets = [
         (None, {
             'fields': (
-                'fluid',
+                #'fluid',
+                'background_color',
             )
         }),
         (_('Advanced settings'), {
             'classes': ('collapse',),
             'fields': (
                 'tag_type',
-                'background_color',
                 'attributes',
             )
         }),
