@@ -14,6 +14,7 @@ from djangocms_link.models import AbstractLink
 from djangocms_text_ckeditor.fields import HTMLField
 
 from filer.fields.image import FilerImageField
+from js_color_picker.fields import RGBColorField
 
 from djangocms_bootstrap4.fields import TagTypeField, AttributesField
 
@@ -123,7 +124,7 @@ class Bootstrap4Carousel(CMSPlugin):
 class Bootstrap4CarouselSlide(AbstractLink, CMSPlugin):
     carousel_image = FilerImageField(
         verbose_name=_('Slide image'),
-        blank=False,
+        blank=True,
         null=True,
         on_delete=models.SET_NULL,
         related_name='+',
@@ -133,6 +134,11 @@ class Bootstrap4CarouselSlide(AbstractLink, CMSPlugin):
         blank=True,
         default='',
         help_text=_('Content may also be added using child plugins.'),
+    )
+    background_color = RGBColorField(
+        verbose_name=_('Background Color'),
+        blank=True,
+        null=True
     )
     link = models.CharField(verbose_name=_('Link'), blank=True, max_length=2040)
     tag_type = TagTypeField()
