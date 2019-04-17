@@ -29,7 +29,7 @@ class Bootstrap4PicturePlugin(PicturePlugin):
     fieldsets[0] = (
         None, {
             'fields': (
-                'picture',
+                ('picture', 'svg'),
                 'external_picture',
                 ('picture_fluid', 'picture_rounded', 'picture_thumbnail'),
             )
