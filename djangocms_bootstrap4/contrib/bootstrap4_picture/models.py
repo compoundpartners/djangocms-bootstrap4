@@ -119,4 +119,10 @@ class Bootstrap4Picture(AbstractPicture):
     def img_src(self):
         if self.svg:
             return self.svg.url
+        elif self.external_picture:
+            return self.external_picture
+        elif self.picture and self.use_no_cropping:
+            return self.picture.url
+        elif not self.picture:
+            return ''
         return super().img_src

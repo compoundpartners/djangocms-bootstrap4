@@ -12,3 +12,8 @@ CODE_TYPE_CHOICES = (
     ('kbd', _('User input')),
     ('samp', _('Sample output')),
 )
+HIDE_BLACKQUOTE_ALIGNMENT = getattr(
+    settings,
+    'DJANGOCMS_BOOTSTRAP4_HIDE_BLACKQUOTE_ALIGNMENT',
+    False
+)

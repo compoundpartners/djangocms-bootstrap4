@@ -11,6 +11,7 @@ from djangocms_bootstrap4.helpers import concat_classes
 
 from .forms import Bootstrap4CodeForm
 from .models import Bootstrap4Code, Bootstrap4Blockquote, Bootstrap4Figure
+from .constants import HIDE_BLACKQUOTE_ALIGNMENT
 
 
 class Bootstrap4CodePlugin(CMSPluginBase):
@@ -54,13 +55,18 @@ class Bootstrap4BlockquotePlugin(CMSPluginBase):
     change_form_template = 'djangocms_bootstrap4/admin/blockquote.html'
     text_enabled = True
 
+    main_fields = (
+        'quote_content',
+        ('quote_origin_name', 'quote_origin_role', 'quote_origin_company',),
+    )
+    if not HIDE_BLACKQUOTE_ALIGNMENT:
+        main_fields += (
+            'quote_alignment',
+        )
+
     fieldsets = [
         (None, {
-            'fields': (
-                'quote_content',
-                ('quote_origin_name', 'quote_origin_role', 'quote_origin_company',),
-                'quote_alignment',
-            )
+            'fields': main_fields
         }),
         (_('Advanced settings'), {
             'classes': ('collapse',),
