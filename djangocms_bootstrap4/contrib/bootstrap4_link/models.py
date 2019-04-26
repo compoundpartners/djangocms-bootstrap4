@@ -67,6 +67,20 @@ class Bootstrap4Link(AbstractLink):
     icon_right = Icon(
         verbose_name=_('Icon right'),
     )
+    no_link = models.BooleanField(
+        verbose_name=_('No Link'),
+        default=False,
+    )
+
 
     def __str__(self):
         return str(self.pk)
+
+    def get_link(self):
+        if self.no_link:
+            return ''
+        return super(Bootstrap4Link, self).get_link()
+
+    def clean(self):
+        if not self.no_link:
+            super(Bootstrap4Link, self).clean()

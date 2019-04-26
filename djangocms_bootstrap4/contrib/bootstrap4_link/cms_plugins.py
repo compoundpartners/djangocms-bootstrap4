@@ -29,7 +29,7 @@ class Bootstrap4LinkPlugin(LinkPlugin):
 
     fields = (
         ('name', 'link_type'),
-        ('external_link', 'internal_link'),
+        ('external_link', 'internal_link', 'no_link'),
         ('link_alignment',),
         ('link_context', 'link_size'),
         ('link_outline', 'link_block'),
