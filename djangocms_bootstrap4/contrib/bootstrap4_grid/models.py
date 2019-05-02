@@ -129,7 +129,7 @@ class Bootstrap4GridRow(CMSPlugin):
     )
 
     def __str__(self):
-        return str(self.pk)
+        return self.title or str(self.pk)
 
     def get_short_description(self):
         instance = self.get_plugin_instance()[0]
@@ -147,7 +147,7 @@ class Bootstrap4GridRow(CMSPlugin):
         #     ' .'.join(instance.attributes['class'].split())
         # )
 
-        return column_count_str
+        return '%s %s' % (column_count_str, self.title or '')
 
 
 @python_2_unicode_compatible
