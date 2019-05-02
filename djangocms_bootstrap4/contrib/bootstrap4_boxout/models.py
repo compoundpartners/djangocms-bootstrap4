@@ -22,6 +22,10 @@ class Bootstrap4Boxout(CMSPlugin):
         default=False,
         help_text=_('Adds the .boxout-fluid class.'),
     )
+    full_width = models.BooleanField(
+        verbose_name=_('Show Full Width'),
+        default=False,
+    )
     tag_type = TagTypeField()
     background_color = RGBColorField(
         verbose_name=_('Background Color'),

@@ -29,6 +29,7 @@ class Bootstrap4BoxoutPlugin(CMSPluginBase):
         (None, {
             'fields': (
                 #'fluid',
+                'full_width',
                 'background_color',
             )
         }),
@@ -43,9 +44,10 @@ class Bootstrap4BoxoutPlugin(CMSPluginBase):
 
     def render(self, context, instance, placeholder):
         link_classes = ['boxout']
+        if instance.full_width:
+            link_classes.append('full-width')
         if instance.fluid:
             link_classes.append('boxout-fluid')
-
         classes = concat_classes(link_classes + [
             instance.attributes.get('class'),
         ])
