@@ -138,16 +138,16 @@ class Bootstrap4GridRow(CMSPlugin):
             return ugettext('<empty>')
 
         column_count = len(self.child_plugin_instances or [])
-        column_count_str = ungettext(
-            '(1 column)',
-            '(%(count)i columns)',
-            column_count
-        ) % {'count': column_count}
+        #column_count_str = ungettext(
+            #'(1 col)',
+            #'(%(count)i col)',
+            #column_count
+        #) % {'count': column_count}
         # column_count_str += ' .{}'.format(
         #     ' .'.join(instance.attributes['class'].split())
         # )
 
-        return '%s %s' % (column_count_str, self.title or '')
+        return '(%s) %s' % (column_count, self.title or '')
 
 
 @python_2_unicode_compatible

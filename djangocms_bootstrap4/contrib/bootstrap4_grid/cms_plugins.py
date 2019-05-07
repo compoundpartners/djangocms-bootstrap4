@@ -71,7 +71,7 @@ class Bootstrap4GridRowPlugin(CMSPluginBase):
     https://getbootstrap.com/docs/4.0/layout/grid/
     """
     model = Bootstrap4GridRow
-    name = _('Column Wrapper')
+    name = _('Row')
     module = _('Bootstrap 4')
     form = Bootstrap4GridRowForm
     change_form_template = 'djangocms_bootstrap4/admin/grid_row.html'
