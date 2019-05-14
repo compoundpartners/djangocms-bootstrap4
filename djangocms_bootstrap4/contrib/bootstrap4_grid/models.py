@@ -3,6 +3,7 @@ from __future__ import unicode_literals
 
 from functools import partial
 
+from django.conf import settings
 from django.db import models
 from django.utils.encoding import python_2_unicode_compatible
 from django.utils.translation import ugettext, ungettext, ugettext_lazy as _
@@ -66,6 +67,18 @@ class Bootstrap4GridRow(CMSPlugin):
     Layout > Grid: "Row" Plugin
     https://getbootstrap.com/docs/4.0/layout/grid/
     """
+    GRID_ROW_LAYOUT_CHOICES = (
+        ('', _('Configure this list in settings (GRID_ROW_LAYOUT_CHOICES)')),
+    )
+    if hasattr(settings, 'GRID_ROW_LAYOUT_CHOICES'):
+        GRID_ROW_LAYOUT_CHOICES = settings.GRID_ROW_LAYOUT_CHOICES
+    layout = models.CharField(
+        verbose_name=_('Layout'),
+        choices=GRID_ROW_LAYOUT_CHOICES,
+        blank=True,
+        max_length=255,
+        help_text=_('Select a layout'),
+    )
     vertical_alignment = models.CharField(
         verbose_name=_('Vertical alignment'),
         choices=GRID_ROW_VERTICAL_ALIGNMENT_CHOICES,

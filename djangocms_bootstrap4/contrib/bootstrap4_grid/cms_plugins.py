@@ -75,11 +75,27 @@ class Bootstrap4GridRowPlugin(CMSPluginBase):
     module = _('Bootstrap 4')
     form = Bootstrap4GridRowForm
     change_form_template = 'djangocms_bootstrap4/admin/grid_row.html'
-    render_template = 'djangocms_bootstrap4/grid_row.html'
+
+    # Template handling
+    render_template = 'djangocms_bootstrap4/grid_row.html'  # The default fallback template
+    GRID_ROW_LAYOUT_CHOICES = (
+        ('', _('Configure this list in settings (GRID_ROW_LAYOUT_CHOICES)')),
+    )
+    if hasattr(settings, 'GRID_ROW_LAYOUT_CHOICES'):
+        GRID_ROW_LAYOUT_CHOICES = settings.GRID_ROW_LAYOUT_CHOICES
+    TEMPLATE_NAME = 'djangocms_bootstrap4/grid_row{separator}{variant}.html'
+    def get_render_template(self, context, instance, placeholder):
+        separator = ''
+        if instance.layout:
+            separator = '__'
+        return self.TEMPLATE_NAME.format(separator=separator, variant=instance.layout)
+    # End template handling
+
     allow_children = True
     child_classes = ['Bootstrap4GridColumnPlugin']
 
     main_fields = (
+        'layout',
         'create',
         ('vertical_alignment', 'horizontal_alignment'),
         'full_width',

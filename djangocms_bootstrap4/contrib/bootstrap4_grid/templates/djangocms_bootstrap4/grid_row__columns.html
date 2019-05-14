@@ -1,0 +1,14 @@
+{% load cms_tags %}
+
+<{{ instance.tag_type }} {{ instance.attributes_str }}>
+    {% if instance.display_title %}
+        <h2 class="col">
+            {% if instance.icon %}{% with icon_class=instance.icon instance=instance.icon %}{% include "djangocms_icon/includes/icon.html" %}{% endwith %}{% endif %}
+            {{ instance.title }}
+        </h2>
+        <div class="w-100"></div>
+    {% endif %}
+    {% for plugin in instance.child_plugin_instances %}
+        {% with forloop as parentloop %}{% render_plugin plugin %}{% endwith %}
+    {% endfor %}
+</{{ instance.tag_type }}>
