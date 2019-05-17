@@ -22,6 +22,12 @@ USE_LINK_ICONS = getattr(
     True,
 )
 
+SHOW_BUTTON_CONTEXT = getattr(
+    settings,
+    'DJANGOCMS_BOOTSTRAP4_SHOW_BUTTON_CONTEXT',
+    False,
+)
+
 LINK_ALIGNMENTS = (
     ('', _('None')),
     ('text-left', _('Left')),

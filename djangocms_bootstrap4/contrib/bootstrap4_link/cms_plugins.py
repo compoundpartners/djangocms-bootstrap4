@@ -11,7 +11,7 @@ from djangocms_link.cms_plugins import LinkPlugin
 from djangocms_link.models import get_templates
 from djangocms_bootstrap4.helpers import concat_classes, get_plugin_template
 
-from .constants import USE_LINK_ICONS
+from .constants import USE_LINK_ICONS, SHOW_BUTTON_CONTEXT
 from .models import Bootstrap4Link
 from .forms import Bootstrap4LinkForm
 
@@ -31,7 +31,16 @@ class Bootstrap4LinkPlugin(LinkPlugin):
         ('name', 'link_type'),
         ('external_link', 'internal_link', 'no_link'),
         ('link_alignment',),
-        ('link_context', 'link_size'),
+    )
+    if SHOW_BUTTON_CONTEXT:
+        fields += (
+            ('link_context', 'link_size'),
+        )
+    else:
+        fields += (
+            'link_size',
+        )
+    fields += (
         ('link_outline', 'link_block'),
     )
 

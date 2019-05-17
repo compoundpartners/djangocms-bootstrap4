@@ -57,6 +57,11 @@ class Form(forms.BaseForm):
         required=False,
         initial=True,
     )
+    show_button_context = forms.CheckboxField(
+        'Show Context for Links/Buttons',
+        required=False,
+        initial=False,
+    )
 
     def to_settings(self, data, settings):
         if data['grid_size']:
@@ -94,6 +99,9 @@ class Form(forms.BaseForm):
 
         if data['enable_col_bg_image']:
             settings['DJANGOCMS_BOOTSTRAP4_USE_COL_BG_IMAGE'] = int(data['enable_col_bg_image'])
+
+        if data['show_button_context']:
+            settings['DJANGOCMS_BOOTSTRAP4_SHOW_BUTTON_CONTEXT'] = int(data['show_button_context'])
 
 
         return settings
