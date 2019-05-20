@@ -58,9 +58,7 @@ class Bootstrap4LinkPlugin(LinkPlugin):
     fieldsets = LinkPlugin.fieldsets
 
     def get_render_template(self, context, instance, placeholder):
-        return get_plugin_template(
-            instance, 'link', 'link', get_templates()
-        )
+        return 'djangocms_bootstrap4/link/{}/link.html'.format(instance.template)
 
     def render(self, context, instance, placeholder):
         link_classes = []
