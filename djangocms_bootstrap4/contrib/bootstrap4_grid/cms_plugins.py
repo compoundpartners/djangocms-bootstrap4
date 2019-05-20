@@ -78,11 +78,6 @@ class Bootstrap4GridRowPlugin(CMSPluginBase):
 
     # Template handling
     render_template = 'djangocms_bootstrap4/grid_row.html'  # The default fallback template
-    GRID_ROW_LAYOUT_CHOICES = (
-        ('', _('Configure this list in settings (GRID_ROW_LAYOUT_CHOICES)')),
-    )
-    if hasattr(settings, 'GRID_ROW_LAYOUT_CHOICES'):
-        GRID_ROW_LAYOUT_CHOICES = settings.GRID_ROW_LAYOUT_CHOICES
     TEMPLATE_NAME = 'djangocms_bootstrap4/grid_row{separator}{variant}.html'
     def get_render_template(self, context, instance, placeholder):
         separator = ''
@@ -182,6 +177,7 @@ class Bootstrap4GridColumnPlugin(CMSPluginBase):
     form = Bootstrap4GridColumnForm
     change_form_template = 'djangocms_bootstrap4/admin/grid_column.html'
     render_template = 'djangocms_bootstrap4/grid_column.html'
+    TEMPLATE_NAME = 'djangocms_bootstrap4/grid_column{separator}{variant}.html'
     allow_children = True
     require_parent = True
     # TODO it should allow for the responsive utilitiy class
@@ -206,6 +202,7 @@ class Bootstrap4GridColumnPlugin(CMSPluginBase):
     fieldsets = [
         (None, {
             'fields': (
+                'layout',
                 'column_type',
                 ('column_size', 'column_alignment'),
             )
@@ -250,6 +247,11 @@ class Bootstrap4GridColumnPlugin(CMSPluginBase):
             context, instance, placeholder
         )
 
+    def get_render_template(self, context, instance, placeholder):
+        separator = ''
+        if instance.layout:
+            separator = '__'
+        return self.TEMPLATE_NAME.format(separator=separator, variant=instance.layout)
 
 plugin_pool.register_plugin(Bootstrap4GridContainerPlugin)
 plugin_pool.register_plugin(Bootstrap4GridRowPlugin)

@@ -82,3 +82,13 @@ GRID_USE_COL_BG_IMAGE = getattr(
     'DJANGOCMS_BOOTSTRAP4_USE_COL_BG_IMAGE',
     True,
 )
+GRID_ROW_LAYOUT_CHOICES = getattr(
+    settings,
+    'GRID_ROW_LAYOUT_CHOICES',
+    (('', _('Configure this list in settings (GRID_ROW_LAYOUT_CHOICES)')),)
+)
+GRID_COL_LAYOUT_CHOICES = getattr(
+    settings,
+    'GRID_COL_LAYOUT_CHOICES',
+    (('', _('Configure this list in settings (GRID_COL_LAYOUT_CHOICES)')),)
+)
