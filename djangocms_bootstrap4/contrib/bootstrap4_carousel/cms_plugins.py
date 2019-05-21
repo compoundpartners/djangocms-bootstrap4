@@ -47,7 +47,7 @@ class Bootstrap4CarouselPlugin(CMSPluginBase):
 
     def get_render_template(self, context, instance, placeholder):
         return get_plugin_template(
-            instance, 'carousel', 'carousel', CAROUSEL_TEMPLATE_CHOICES
+            instance, 'carousel', 'carousel', [[instance.carousel_style]] if instance.carousel_style else CAROUSEL_TEMPLATE_CHOICES
         )
 
     def render(self, context, instance, placeholder):

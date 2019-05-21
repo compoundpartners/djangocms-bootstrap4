@@ -28,11 +28,11 @@ def get_plugin_template(instance, prefix, name, templates):
             'carousel_style',
             templates[0][0],
         )
-        try:
-            select_template([template])
-        except TemplateDoesNotExist:
-            # TODO render a warning inside the template
-            template = 'default'
+    try:
+        select_template(['djangocms_bootstrap4/{}/{}/{}.html'.format(prefix, template, name)])
+    except TemplateDoesNotExist:
+        # TODO render a warning inside the template
+        template = 'default'
 
     return 'djangocms_bootstrap4/{}/{}/{}.html'.format(prefix, template, name)
 
