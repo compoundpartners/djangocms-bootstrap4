@@ -1,6 +1,7 @@
 {% load cms_tags %}
 
 <{{ instance.tag_type }} {{ instance.attributes_str }}>
+    {% if instance.show_title %}<h3>{{ instance.title }}</h3>{% endif %}
     <ul class="nav {{ instance.tab_type }}
         {% if instance.tab_alignment %} {{ instance.tab_alignment }}{% endif %}"
         role="tablist">

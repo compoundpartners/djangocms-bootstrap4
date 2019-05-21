@@ -7,7 +7,7 @@ from django.utils.translation import ugettext_lazy as _
 from cms.plugin_base import CMSPluginBase
 from cms.plugin_pool import plugin_pool
 
-from djangocms_bootstrap4.helpers import get_plugin_template
+from djangocms_bootstrap4.helpers import get_plugin_template, concat_classes
 
 from .constants import TAB_TEMPLATE_CHOICES
 from .models import Bootstrap4Tab, Bootstrap4TabItem
@@ -28,8 +28,11 @@ class Bootstrap4TabPlugin(CMSPluginBase):
     fieldsets = [
         (None, {
             'fields': (
+                ('title', 'show_title'),
+                'background_color',
                 ('tab_type', 'tab_alignment'),
                 ('tab_index', 'tab_effect'),
+                'full_width',
             )
         }),
         (_('Advanced settings'), {
@@ -46,6 +49,21 @@ class Bootstrap4TabPlugin(CMSPluginBase):
         return get_plugin_template(
             instance, 'tabs', 'tabs', TAB_TEMPLATE_CHOICES
         )
+
+    def render(self, context, instance, placeholder):
+        full_width = 'full-width' if instance.full_width else ''
+        classes = concat_classes([
+            full_width,
+            instance.attributes.get('class'),
+        ])
+        instance.attributes['class'] = classes
+        if instance.background_color:
+            instance.attributes['style'] = 'background-color: %s;' % instance.background_color
+
+        return super(Bootstrap4TabPlugin, self).render(
+            context, instance, placeholder
+        )
+
 
 
 class Bootstrap4TabItemPlugin(CMSPluginBase):

@@ -8,6 +8,7 @@ from django.utils.translation import ugettext_lazy as _
 from cms.models import CMSPlugin
 
 from djangocms_bootstrap4.fields import TagTypeField, AttributesField
+from js_color_picker.fields import RGBColorField
 
 from .constants import (
     TAB_TEMPLATE_CHOICES,
@@ -23,6 +24,25 @@ class Bootstrap4Tab(CMSPlugin):
     Components > "Navs - Tab" Plugin
     https://getbootstrap.com/docs/4.0/components/navs/
     """
+    title = models.CharField(
+        verbose_name=_('Title'),
+        max_length=255,
+        null=True,
+        blank=True,
+    )
+    show_title = models.BooleanField(
+        verbose_name=_('Show title'),
+        default=False,
+    )
+    full_width = models.BooleanField(
+        verbose_name=_('Full Width'),
+        default=False,
+    )
+    background_color = RGBColorField(
+        verbose_name=_('Background Color'),
+        blank=True,
+        null=True
+    )
     tab_style = models.CharField(
         verbose_name=_('Template'),
         choices=TAB_TEMPLATE_CHOICES,
@@ -58,9 +78,11 @@ class Bootstrap4Tab(CMSPlugin):
     attributes = AttributesField()
 
     def __str__(self):
-        return str(self.pk)
+        return self.title or str(self.pk)
 
     def get_short_description(self):
+        if self.title:
+            return self.title
         text = '({}) '.format(self.tab_type)
 
         if self.tab_alignment:
