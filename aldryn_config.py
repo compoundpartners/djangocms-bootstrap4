@@ -45,7 +45,22 @@ class Form(forms.BaseForm):
     enable_row_icon = forms.CheckboxField(
         'Enable row icon',
         required=False,
+        initial=False,
+    )
+    enable_row_alignment = forms.CheckboxField(
+        'Enable row alignment controls',
+        required=False,
         initial=True,
+    )
+    enable_row_tag_type = forms.CheckboxField(
+        'Enable Row Tag type',
+        required=False,
+        initial=False,
+    )
+    enable_row_gutter = forms.CheckboxField(
+        'Enable Row Gutter control',
+        required=False,
+        initial=False,
     )
     enable_col_bg_color = forms.CheckboxField(
         'Enable col background color',
@@ -92,7 +107,16 @@ class Form(forms.BaseForm):
             settings['DJANGOCMS_BOOTSTRAP4_USE_ROW_BG_IMAGE'] = int(data['enable_row_bg_image'])
 
         if data['enable_row_icon']:
-            settings['DJANGOCMS_BOOTSTRAP4_USE_ROW_BG_ICON'] = int(data['enable_row_icon'])
+            settings['DJANGOCMS_BOOTSTRAP4_USE_ROW_ICON'] = int(data['enable_row_icon'])
+
+        if data['enable_row_alignment']:
+            settings['DJANGOCMS_BOOTSTRAP4_USE_ROW_ALIGNMENT'] = int(data['enable_row_alignment'])
+
+        if data['enable_row_tag_type']:
+            settings['DJANGOCMS_BOOTSTRAP4_USE_ROW_TAG_TYPE'] = int(data['enable_row_tag_type'])
+
+        if data['enable_row_gutter']:
+            settings['DJANGOCMS_BOOTSTRAP4_USE_ROW_GUTTER'] = int(data['enable_row_gutter'])
 
         if data['enable_col_bg_color']:
             settings['DJANGOCMS_BOOTSTRAP4_USE_COL_BG_COLOR'] = int(data['enable_col_bg_color'])

@@ -22,7 +22,10 @@ from .forms import (
 from .constants import(
     GRID_USE_ROW_BG_COLOR,
     GRID_USE_ROW_BG_IMAGE,
-    GRID_USE_ROW_BG_ICON,
+    GRID_USE_ROW_ICON,
+    GRID_USE_ROW_ALIGNMENT,
+    GRID_USE_ROW_TAG_TYPE,
+    GRID_USE_ROW_GUTTER,
     GRID_USE_COL_BG_COLOR,
     GRID_USE_COL_BG_IMAGE,
 )
@@ -92,7 +95,6 @@ class Bootstrap4GridRowPlugin(CMSPluginBase):
     main_fields = (
         'layout',
         'create',
-        ('vertical_alignment', 'horizontal_alignment'),
         'full_width',
         ('title', 'display_title'),
     )
@@ -104,12 +106,24 @@ class Bootstrap4GridRowPlugin(CMSPluginBase):
         main_fields +=(
             ('background_image', 'parallax'),
         )
-    if GRID_USE_ROW_BG_ICON:
+    if GRID_USE_ROW_ICON:
         main_fields +=(
             'icon',
         )
-    advanced_fields = (
-        ('tag_type', 'gutters',),
+    advanced_fields = ()
+    if GRID_USE_ROW_TAG_TYPE:
+        advanced_fields += (
+            'tag_type',
+        )
+    if GRID_USE_ROW_GUTTER:
+        advanced_fields += (
+            'gutters',
+        )
+    if GRID_USE_ROW_ALIGNMENT:
+        advanced_fields += (
+            ('vertical_alignment', 'horizontal_alignment'),
+        )
+    advanced_fields += (
         'attributes',
     )
 

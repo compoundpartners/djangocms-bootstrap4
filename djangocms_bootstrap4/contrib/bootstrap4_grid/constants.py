@@ -67,10 +67,25 @@ GRID_USE_ROW_BG_IMAGE = getattr(
     'DJANGOCMS_BOOTSTRAP4_USE_ROW_BG_IMAGE',
     True,
 )
-GRID_USE_ROW_BG_ICON = getattr(
+GRID_USE_ROW_ICON = getattr(
     settings,
-    'DJANGOCMS_BOOTSTRAP4_USE_ROW_BG_ICON',
+    'DJANGOCMS_BOOTSTRAP4_USE_ROW_ICON',
+    False,
+)
+GRID_USE_ROW_ALIGNMENT = getattr(
+    settings,
+    'DJANGOCMS_BOOTSTRAP4_USE_ROW_ALIGNMENT',
     True,
+)
+GRID_USE_ROW_TAG_TYPE = getattr(
+    settings,
+    'DJANGOCMS_BOOTSTRAP4_USE_ROW_TAG_TYPE',
+    False,
+)
+GRID_USE_ROW_GUTTER = getattr(
+    settings,
+    'DJANGOCMS_BOOTSTRAP4_USE_ROW_GUTTER',
+    False,
 )
 GRID_USE_COL_BG_COLOR = getattr(
     settings,
