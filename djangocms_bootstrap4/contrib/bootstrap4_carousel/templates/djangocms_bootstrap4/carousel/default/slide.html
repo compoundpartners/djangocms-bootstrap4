@@ -15,6 +15,9 @@
 
     <div class="carousel-caption d-none d-md-block">
         {{ instance.link_target }}
+        {% if instance.title %}
+            <h2>{{ instance.title }}</h2>
+        {% endif %}
         {% if instance.carousel_content %}
             {{ instance.carousel_content }}
         {% endif %}

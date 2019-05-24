@@ -129,6 +129,12 @@ class Bootstrap4CarouselSlide(AbstractLink, CMSPlugin):
         on_delete=models.SET_NULL,
         related_name='+',
     )
+    title = models.CharField(
+        verbose_name=_('title'),
+        max_length=255,
+        blank=True,
+        null=True
+    )
     carousel_content = HTMLField(
         verbose_name=_('Content'),
         blank=True,
