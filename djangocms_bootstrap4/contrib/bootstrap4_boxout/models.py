@@ -27,6 +27,18 @@ class Bootstrap4Boxout(CMSPlugin):
         default=False,
     )
     tag_type = TagTypeField()
+    title = models.CharField(
+        verbose_name=_('Title'),
+        null=True,
+        blank=True,
+        max_length=255,
+    )
+    layout = models.CharField(
+        verbose_name=_('Layout'),
+        blank=True,
+        max_length=255,
+        help_text=_('Select a layout'),
+    )
     background_color = RGBColorField(
         verbose_name=_('Background Color'),
         blank=True,
