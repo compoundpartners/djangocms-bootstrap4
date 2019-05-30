@@ -4,6 +4,8 @@ from __future__ import unicode_literals
 from django.conf import settings
 from django.utils.translation import ugettext_lazy as _
 from django import forms
+from django.template import TemplateDoesNotExist
+from django.template.loader import select_template
 
 from cms.plugin_base import CMSPluginBase
 from cms.plugin_pool import plugin_pool
@@ -27,8 +29,8 @@ class Bootstrap4BoxoutPlugin(CMSPluginBase):
     model = Bootstrap4Boxout
     name = _('Boxout')
     module = _('Bootstrap 4')
-    render_template = 'djangocms_bootstrap4/boxout/default/bootstrap.html'
-    TEMPLATE_NAME = 'djangocms_bootstrap4/boxout/%s/bootstrap.html'
+    render_template = 'djangocms_bootstrap4/boxout/default/boxout.html'
+    TEMPLATE_NAME = 'djangocms_bootstrap4/boxout/%s/boxout.html'
     change_form_template = 'djangocms_bootstrap4/admin/boxout.html'
     allow_children = True
     child_classes = ['TextPlugin', 'Bootstrap4LinkPlugin', 'Bootstrap4PicturePlugin', 'Bootstrap4CollapsePlugin', 'FilePlugin']
