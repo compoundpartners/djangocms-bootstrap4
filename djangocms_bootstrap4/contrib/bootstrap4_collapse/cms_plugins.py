@@ -34,6 +34,7 @@ class Bootstrap4CollapsePlugin(CMSPluginBase):
         'Bootstrap4CardPlugin',
         'Bootstrap4SpacingPlugin',
         'Bootstrap4GridRowPlugin',
+        'TextPlugin',
     ]
 
     fieldsets = [
