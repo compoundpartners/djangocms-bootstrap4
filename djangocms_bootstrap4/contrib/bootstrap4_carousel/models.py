@@ -15,6 +15,7 @@ from djangocms_text_ckeditor.fields import HTMLField
 
 from filer.fields.image import FilerImageField
 from filer.fields.file import FilerFileField
+from django.core.validators import FileExtensionValidator
 from js_color_picker.fields import RGBColorField
 
 from djangocms_bootstrap4.fields import TagTypeField, AttributesField
@@ -123,10 +124,6 @@ class Bootstrap4Carousel(CMSPlugin):
 @python_2_unicode_compatible
 class Bootstrap4CarouselSlide(AbstractLink, CMSPlugin):
 
-    def validate_mp4_file(value):
-        if not value.name.endswith('.mp4'):
-            raise ValidationError(u'Error message')
-
     carousel_image = FilerImageField(
         verbose_name=_('Slide image'),
         blank=True,
@@ -138,7 +135,7 @@ class Bootstrap4CarouselSlide(AbstractLink, CMSPlugin):
         verbose_name=_('Slide video background'),
         blank=True,
         null=True,
-        validators=[validate_mp4_file],
+        validators=[FileExtensionValidator(allowed_extensions=['mp4'])],
         related_name='+',
         help_text=_('Use MP4 videos'),
     )
