@@ -77,6 +77,16 @@ class Form(forms.BaseForm):
         required=False,
         initial=False,
     )
+    enable_carousel_slide_title_anim = forms.CheckboxField(
+        'Enable Carousel Slide title animation',
+        required=False,
+        initial=False,
+    )
+    enable_carousel_slide_video_bg = forms.CheckboxField(
+        'Enable Carousel Slide video background',
+        required=False,
+        initial=False,
+    )
 
     def to_settings(self, data, settings):
         if data['grid_size']:
@@ -127,5 +137,10 @@ class Form(forms.BaseForm):
         if data['show_button_context']:
             settings['DJANGOCMS_BOOTSTRAP4_SHOW_BUTTON_CONTEXT'] = int(data['show_button_context'])
 
+        if data['enable_carousel_slide_title_anim']:
+            settings['DJANGOCMS_BOOTSTRAP4_CAROUSEL_SLIDE_TITLE_ANIM'] = int(data['enable_carousel_slide_title_anim'])
+
+        if data['enable_carousel_slide_video_bg']:
+            settings['DJANGOCMS_BOOTSTRAP4_CAROUSEL_SLIDE_VIDEO_BG'] = int(data['enable_carousel_slide_video_bg'])
 
         return settings

@@ -14,6 +14,7 @@ from djangocms_link.models import AbstractLink
 from djangocms_text_ckeditor.fields import HTMLField
 
 from filer.fields.image import FilerImageField
+from filer.fields.file import FilerFileField
 from js_color_picker.fields import RGBColorField
 
 from djangocms_bootstrap4.fields import TagTypeField, AttributesField
@@ -24,7 +25,6 @@ from .constants import (
     CAROUSEL_RIDE_CHOICES,
     CAROUSEL_ASPECT_RATIO_CHOICES,
 )
-
 
 @python_2_unicode_compatible
 class Bootstrap4Carousel(CMSPlugin):
@@ -122,12 +122,29 @@ class Bootstrap4Carousel(CMSPlugin):
 
 @python_2_unicode_compatible
 class Bootstrap4CarouselSlide(AbstractLink, CMSPlugin):
+
+    def validate_mp4_file(value):
+        if not value.name.endswith('.mp4'):
+            raise ValidationError(u'Error message')
+
     carousel_image = FilerImageField(
         verbose_name=_('Slide image'),
         blank=True,
         null=True,
         on_delete=models.SET_NULL,
         related_name='+',
+    )
+    carousel_video = FilerFileField(
+        verbose_name=_('Slide video background'),
+        blank=True,
+        null=True,
+        validators=[validate_mp4_file],
+        related_name='+',
+        help_text=_('Use MP4 videos'),
+    )
+    animate_title = models.BooleanField(
+        verbose_name=_('Animate Title'),
+        default=False,
     )
     title = models.CharField(
         verbose_name=_('title'),
