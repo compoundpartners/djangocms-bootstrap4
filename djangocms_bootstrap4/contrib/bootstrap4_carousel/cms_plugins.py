@@ -81,7 +81,6 @@ class Bootstrap4CarouselSlidePlugin(CMSPluginBase):
             'fields': (
                 'carousel_image',
                 'carousel_video',
-                'carousel_video_url',
                 'background_color',
                 ('title', 'animate_title',),
                 'carousel_content',
