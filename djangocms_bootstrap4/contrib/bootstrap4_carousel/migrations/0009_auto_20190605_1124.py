@@ -10,7 +10,7 @@ import js_components.models
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('js_components', '0012_auto_20190514_1402'),
+        ('js_components', '0013_video'),
         ('bootstrap4_carousel', '0008_auto_20190604_1547'),
     ]
 
