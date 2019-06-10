@@ -17,7 +17,6 @@ from filer.fields.image import FilerImageField
 from filer.fields.file import FilerFileField
 from django.core.validators import FileExtensionValidator
 from js_color_picker.fields import RGBColorField
-from js_components.models import FilerVideoField
 
 from djangocms_bootstrap4.fields import TagTypeField, AttributesField
 
@@ -132,7 +131,7 @@ class Bootstrap4CarouselSlide(AbstractLink, CMSPlugin):
         on_delete=models.SET_NULL,
         related_name='+',
     )
-    carousel_video = FilerVideoField(
+    carousel_video = FilerFileField(
         verbose_name=_('Slide video background'),
         blank=True,
         null=True,
