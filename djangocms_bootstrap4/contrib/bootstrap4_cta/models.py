@@ -10,6 +10,11 @@ from js_color_picker.fields import RGBColorField
 
 from djangocms_bootstrap4.fields import TagTypeField, AttributesField
 
+from .constants import (
+    CTA_LAYOUT_CHOICES,
+)
+
+
 
 @python_2_unicode_compatible
 class Bootstrap4Cta(CMSPlugin):
@@ -17,6 +22,13 @@ class Bootstrap4Cta(CMSPlugin):
     Components > "Cta" Plugin
     https://getbootstrap.com/docs/4.0/components/cta/
     """
+    layout = models.CharField(
+        verbose_name=_('Layout'),
+        choices=CTA_LAYOUT_CHOICES,
+        blank=True,
+        max_length=255,
+        help_text=_('Select a layout'),
+    )
     fluid = models.BooleanField(
         verbose_name=_('Fluid'),
         default=False,

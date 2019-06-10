@@ -20,14 +20,25 @@ class Bootstrap4CtaPlugin(CMSPluginBase):
     model = Bootstrap4Cta
     name = _('Call To Action')
     module = _('Bootstrap 4')
-    render_template = 'djangocms_bootstrap4/cta.html'
     change_form_template = 'djangocms_bootstrap4/admin/cta.html'
+
+    #Template handling
+    render_template = 'djangocms_bootstrap4/cta.html'  # The default fallback template
+    TEMPLATE_NAME = 'djangocms_bootstrap4/cta{separator}{variant}.html'
+    def get_render_template(self, context, instance, placeholder):
+        separator = ''
+        if instance.layout:
+            separator = '__'
+        return self.TEMPLATE_NAME.format(separator=separator, variant=instance.layout)
+    # End template handling
+    
     allow_children = True
     child_classes = ['TextPlugin', 'Bootstrap4LinkPlugin', 'FilePlugin']
 
     fieldsets = [
         (None, {
             'fields': (
+                'layout',
                 'fluid',
             )
         }),
