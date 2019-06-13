@@ -28,19 +28,19 @@ class Bootstrap4CarouselPlugin(CMSPluginBase):
     fieldsets = [
         (None, {
             'fields': (
-                ('carousel_aspect_ratio', 'carousel_interval'),
+                'carousel_style',
+                ('carousel_interval', 'full_width'),
                 ('carousel_controls', 'carousel_indicators'),
                 ('carousel_keyboard', 'carousel_wrap'),
                 ('carousel_ride', 'carousel_pause'),
-                'full_width',
             )
         }),
         (_('Advanced settings'), {
             'classes': ('collapse',),
             'fields': (
-                'carousel_style',
                 'tag_type',
                 'attributes',
+                'carousel_aspect_ratio',
             )
         }),
     ]
