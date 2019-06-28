@@ -139,6 +139,12 @@ class Bootstrap4CarouselSlide(AbstractLink, CMSPlugin):
         related_name='+',
         help_text=_('Use MP4 videos'),
     )
+    carousel_video_url = models.CharField(
+        verbose_name=_('Slide video background url'),
+        blank=True,
+        null=True,
+        max_length=255
+    )
     animate_title = models.BooleanField(
         verbose_name=_('Animate Title'),
         default=False,
