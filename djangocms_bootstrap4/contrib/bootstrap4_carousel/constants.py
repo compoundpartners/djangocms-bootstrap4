@@ -25,6 +25,12 @@ CAROUSEL_TEMPLATE_CHOICES = getattr(
     ),
 )
 
+CAROUSEL_SLIDE_TEMPLATE_CHOICES = getattr(
+    settings,
+    'DJANGOCMS_BOOTSTRAP4_CAROUSEL_SLIDE_TEMPLATES',
+    CAROUSEL_TEMPLATE_CHOICES
+)
+
 # this is used when no valua is passed in the template via
 # {% with 1024 as width and 768 as height %}
 CAROUSEL_DEFAULT_SIZE = [1024, 768]

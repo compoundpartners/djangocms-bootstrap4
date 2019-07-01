@@ -35,8 +35,7 @@ class Bootstrap4Carousel(CMSPlugin):
     """
     carousel_style = models.CharField(
         verbose_name=_('Template'),
-        choices=CAROUSEL_TEMPLATE_CHOICES,
-        default=CAROUSEL_TEMPLATE_CHOICES[0][0],
+        default='default',
         max_length=255,
         help_text=_('This is the template that will be used for the component.'),
     )
@@ -124,6 +123,12 @@ class Bootstrap4Carousel(CMSPlugin):
 @python_2_unicode_compatible
 class Bootstrap4CarouselSlide(AbstractLink, CMSPlugin):
 
+    carousel_style = models.CharField(
+        verbose_name=_('Template'),
+        default='default',
+        max_length=255,
+        help_text=_('This is the template that will be used for the component.'),
+    )
     carousel_image = FilerImageField(
         verbose_name=_('Slide image'),
         blank=True,

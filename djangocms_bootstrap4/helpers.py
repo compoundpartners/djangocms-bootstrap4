@@ -20,14 +20,7 @@ def concat_classes(classes):
 
 
 def get_plugin_template(instance, prefix, name, templates):
-    if instance.parent is None:
-        template = templates[0][0]
-    else:
-        template = getattr(
-            instance.parent.get_plugin_instance()[0],
-            'carousel_style',
-            templates[0][0],
-        )
+    template = templates[0][0]
     try:
         select_template(['djangocms_bootstrap4/{}/{}/{}.html'.format(prefix, template, name)])
     except TemplateDoesNotExist:
