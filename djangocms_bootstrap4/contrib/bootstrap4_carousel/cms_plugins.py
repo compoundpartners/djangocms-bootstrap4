@@ -116,7 +116,7 @@ class Bootstrap4CarouselSlidePlugin(CMSPluginBase):
         (_('Link settings'), {
             'classes': ('collapse',),
             'fields': (
-                ('link', 'internal_link'),
+                ('link', 'internal_link', 'file_link'),
                 ('mailto', 'phone'),
                 ('anchor', 'target'),
             )
