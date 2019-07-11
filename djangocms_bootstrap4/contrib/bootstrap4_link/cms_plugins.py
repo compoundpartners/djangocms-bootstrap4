@@ -29,8 +29,7 @@ class Bootstrap4LinkPlugin(LinkPlugin):
 
     fields = (
         ('name', 'link_type'),
-        ('external_link', 'internal_link'),
-        ('file_link', 'no_link'),
+        ('external_link', 'internal_link', 'no_link'),
         ('link_alignment',),
     )
     if SHOW_BUTTON_CONTEXT:

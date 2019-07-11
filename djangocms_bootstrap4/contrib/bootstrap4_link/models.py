@@ -13,6 +13,7 @@ from djangocms_bootstrap4.constants import COLOR_STYLE_CHOICES
 
 from .constants import LINK_CHOICES, LINK_SIZE_CHOICES, LINK_ALIGNMENTS
 
+from .validators import LocalORIntranetURLValidator
 
 # 'link' type is added manually as it is only required for this plugin
 COLOR_STYLE_CHOICES = (
@@ -26,6 +27,17 @@ class Bootstrap4Link(AbstractLink):
     Components > "Button" Plugin
     https://getbootstrap.com/docs/4.0/components/buttons/
     """
+    url_validators = [
+        LocalORIntranetURLValidator(),
+    ]
+
+    external_link = models.CharField(
+        verbose_name=_('External link'),
+        blank=True,
+        max_length=2040,
+        validators=url_validators,
+        help_text=_('Provide a link to an external source.'),
+    )
     link_type = models.CharField(
         verbose_name=_('Type'),
         choices=LINK_CHOICES,
