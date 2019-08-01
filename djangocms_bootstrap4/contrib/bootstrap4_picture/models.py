@@ -11,6 +11,7 @@ from cms.models import CMSPlugin
 from djangocms_picture.models import AbstractPicture
 from filer.fields.file import FilerFileField
 
+from ..bootstrap4_link.validators import LocalORIntranetURLValidator
 
 @python_2_unicode_compatible
 class Bootstrap4Picture(AbstractPicture):
@@ -18,6 +19,18 @@ class Bootstrap4Picture(AbstractPicture):
     Content > "Image" Plugin
     https://getbootstrap.com/docs/4.0/content/images/
     """
+    url_validators = [
+        LocalORIntranetURLValidator(),
+    ]
+    link_url = models.CharField(
+        verbose_name=_('link URL'),
+        blank=True,
+        null=True,
+        max_length=2040,
+        validators=url_validators,
+        help_text=_('Wraps the image in a link to an URL.'),
+    )
+
     picture_fluid = models.BooleanField(
         verbose_name=_('Responsive'),
         default=True,
