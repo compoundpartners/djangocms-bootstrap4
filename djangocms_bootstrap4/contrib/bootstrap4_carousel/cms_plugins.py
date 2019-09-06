@@ -15,7 +15,8 @@ from .models import Bootstrap4Carousel, Bootstrap4CarouselSlide
 from .constants import (
     CAROUSEL_DEFAULT_SIZE,
     CAROUSEL_TEMPLATE_CHOICES,
-    CAROUSEL_SLIDE_TEMPLATE_CHOICES
+    CAROUSEL_SLIDE_TEMPLATE_CHOICES,
+    ENABLE_CAROUSEL_SLIDE_ANIMATE_TITLE,
 )
 
 class Bootstrap4CarouselForm(forms.ModelForm):
@@ -109,7 +110,7 @@ class Bootstrap4CarouselSlidePlugin(CMSPluginBase):
                 'carousel_video',
                 'carousel_video_url',
                 'background_color',
-                ('title', 'animate_title',),
+                ('title', 'animate_title',) if ENABLE_CAROUSEL_SLIDE_ANIMATE_TITLE else 'title',
                 'carousel_content',
             )
         }),
