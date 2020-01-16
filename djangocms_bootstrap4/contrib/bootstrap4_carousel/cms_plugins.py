@@ -21,7 +21,7 @@ from .constants import (
 
 class Bootstrap4CarouselForm(forms.ModelForm):
 
-    carousel_style = forms.ChoiceField(CAROUSEL_TEMPLATE_CHOICES, required=False)
+    carousel_style = forms.ChoiceField(choices=CAROUSEL_TEMPLATE_CHOICES, required=False)
 
     class Meta:
         model = Bootstrap4Carousel
@@ -30,7 +30,7 @@ class Bootstrap4CarouselForm(forms.ModelForm):
 
 class Bootstrap4CarouselSlideForm(forms.ModelForm):
 
-    carousel_style = forms.ChoiceField(CAROUSEL_SLIDE_TEMPLATE_CHOICES, required=False)
+    carousel_style = forms.ChoiceField(choices=CAROUSEL_SLIDE_TEMPLATE_CHOICES, required=False)
 
     class Meta:
         model = Bootstrap4CarouselSlide

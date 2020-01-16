@@ -113,6 +113,7 @@ class Bootstrap4GridRow(CMSPlugin):
     )
     background_image = FilerImageField(
         verbose_name=_('Background Image'),
+        on_delete=models.SET_NULL,
         null=True,
         blank=True,
         related_name='row_bg_image'
@@ -204,6 +205,7 @@ class Bootstrap4GridColumn(CMSPlugin):
     )
     background_image = FilerImageField(
         verbose_name=_('Background Image'),
+        on_delete=models.SET_NULL,
         null=True,
         blank=True,
         related_name='col_bg_image'
