@@ -11,7 +11,11 @@ from djangocms_link.cms_plugins import LinkPlugin
 from djangocms_link.models import get_templates
 from djangocms_bootstrap4.helpers import concat_classes, get_plugin_template
 
-from .constants import USE_LINK_ICONS, SHOW_BUTTON_CONTEXT
+from .constants import (
+    USE_LINK_ICONS,
+    SHOW_BUTTON_CONTEXT,
+    ENABLE_BUTTON_COLORPICKER,
+)
 from .models import Bootstrap4Link
 from .forms import Bootstrap4LinkForm
 
@@ -28,9 +32,16 @@ class Bootstrap4LinkPlugin(LinkPlugin):
     module = _('Bootstrap 4')
 
     fields = (
-        ('name', 'link_type'),
+        ('name', 'link_type', 'modal_id'),
         ('external_link', 'internal_link', 'no_link'),
         ('link_alignment',),
+    )
+    if ENABLE_BUTTON_COLORPICKER:
+        fields += (
+            'link_color',
+        )
+    fields += (
+        'template',
     )
     if SHOW_BUTTON_CONTEXT:
         fields += (
@@ -54,6 +65,15 @@ class Bootstrap4LinkPlugin(LinkPlugin):
             'fields': fields
         }
     )
+    LinkPlugin.fieldsets[2] = (
+        _('Advanced settings'), {
+            'classes': ('collapse',),
+            'fields': (
+                'attributes',
+            )
+        }
+    )
+
 
     fieldsets = LinkPlugin.fieldsets
 

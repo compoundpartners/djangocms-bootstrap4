@@ -47,7 +47,7 @@ class Bootstrap4TabPlugin(CMSPluginBase):
 
     def get_render_template(self, context, instance, placeholder):
         return get_plugin_template(
-            instance, 'tabs', 'tabs', TAB_TEMPLATE_CHOICES
+            instance, 'tabs', 'tabs', [[instance.tab_style]] if instance.tab_style else TAB_TEMPLATE_CHOICES
         )
 
     def render(self, context, instance, placeholder):
@@ -94,8 +94,9 @@ class Bootstrap4TabItemPlugin(CMSPluginBase):
     ]
 
     def get_render_template(self, context, instance, placeholder):
+        parent = instance.parent.get_plugin_instance()[0]
         return get_plugin_template(
-            instance, 'tabs', 'item', TAB_TEMPLATE_CHOICES
+            instance, 'tabs', 'item', [[parent.tab_style]] if parent.tab_style else TAB_TEMPLATE_CHOICES
         )
 
 

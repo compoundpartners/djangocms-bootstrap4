@@ -33,9 +33,9 @@ class Bootstrap4BoxoutPlugin(CMSPluginBase):
     TEMPLATE_NAME = 'djangocms_bootstrap4/boxout/%s/boxout.html'
     change_form_template = 'djangocms_bootstrap4/admin/boxout.html'
     allow_children = True
-    child_classes = ['TextPlugin', 'Bootstrap4LinkPlugin',
-        'Bootstrap4PicturePlugin', 'Bootstrap4CollapsePlugin',
-        'FilePlugin', 'PromoUnitPlugin']
+    #child_classes = ['TextPlugin', 'Bootstrap4LinkPlugin',
+        #'Bootstrap4PicturePlugin', 'Bootstrap4CollapsePlugin',
+        #'FilePlugin', 'PromoUnitPlugin']
 
     fieldsets = [
         (None, {

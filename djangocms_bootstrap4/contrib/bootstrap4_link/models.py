@@ -10,6 +10,7 @@ from cms.models import CMSPlugin
 from djangocms_link.models import AbstractLink
 from djangocms_icon.fields import Icon
 from djangocms_bootstrap4.constants import COLOR_STYLE_CHOICES
+from js_color_picker.fields import RGBColorField
 
 from .constants import LINK_CHOICES, LINK_SIZE_CHOICES, LINK_ALIGNMENTS
 
@@ -45,6 +46,11 @@ class Bootstrap4Link(AbstractLink):
         max_length=255,
         help_text=_('Adds either the .btn-* or .text-* classes.'),
     )
+    link_color = RGBColorField(
+        verbose_name=_('Color'),
+        blank=True,
+        null=True
+    )
     link_context = models.CharField(
         verbose_name=_('Context'),
         choices=COLOR_STYLE_CHOICES,
@@ -72,6 +78,13 @@ class Bootstrap4Link(AbstractLink):
         verbose_name=_('Block'),
         default=False,
         help_text=_('Extends the button to the width of its container.'),
+    )
+    modal_id = models.CharField(
+        blank=True,
+        default='',
+        max_length=60,
+        verbose_name=_('Modal Id'),
+        help_text=_('Do not include a preceding "#" symbol.'),
     )
     icon_left = Icon(
         verbose_name=_('Icon left'),

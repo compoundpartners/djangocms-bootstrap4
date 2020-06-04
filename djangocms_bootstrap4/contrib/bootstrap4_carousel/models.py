@@ -33,6 +33,19 @@ class Bootstrap4Carousel(CMSPlugin):
     Components > "Carousel" Plugin
     https://getbootstrap.com/docs/4.0/components/carousel/
     """
+    carousel_title = models.CharField(
+        verbose_name=_('Title'),
+        max_length=255,
+        null=True,
+        blank=True,
+    )
+    carousel_background_image = FilerImageField(
+        verbose_name=_('background image'),
+        blank=True,
+        null=True,
+        on_delete=models.SET_NULL,
+        related_name='+',
+    )
     carousel_style = models.CharField(
         verbose_name=_('Template'),
         default='default',

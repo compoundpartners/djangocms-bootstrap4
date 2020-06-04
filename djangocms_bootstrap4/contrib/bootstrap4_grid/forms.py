@@ -1,13 +1,17 @@
 # -*- coding: utf-8 -*-
 from __future__ import unicode_literals
 
-from django.forms import models, IntegerField, BooleanField
+from django.forms import models, IntegerField, BooleanField, ChoiceField
 from django.utils.translation import ugettext_lazy as _
 
 from djangocms_bootstrap4.constants import DEVICE_SIZES
 from djangocms_bootstrap4.fields import IntegerRangeField
 
-from .constants import GRID_SIZE
+from .constants import (
+    GRID_SIZE,
+    GRID_ROW_LAYOUT_CHOICES,
+    GRID_COL_LAYOUT_CHOICES,
+)
 from .models import Bootstrap4GridRow, Bootstrap4GridColumn
 
 
@@ -19,6 +23,7 @@ class Bootstrap4GridRowForm(models.ModelForm):
         min_value=0,
         max_value=GRID_SIZE,
     )
+    layout = ChoiceField(choices=(('', '----------'),) + GRID_ROW_LAYOUT_CHOICES, required=False)
 
     class Meta:
         model = Bootstrap4GridRow
@@ -26,6 +31,8 @@ class Bootstrap4GridRowForm(models.ModelForm):
 
 
 class Bootstrap4GridColumnBaseForm(models.ModelForm):
+    layout = ChoiceField(choices=(('', '----------'),) + GRID_COL_LAYOUT_CHOICES, required=False)
+
     class Meta:
         model = Bootstrap4GridColumn
         fields = '__all__'

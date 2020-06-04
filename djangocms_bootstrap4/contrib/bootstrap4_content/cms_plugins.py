@@ -3,13 +3,15 @@ from __future__ import unicode_literals
 
 from django.conf import settings
 from django.utils.translation import ugettext_lazy as _
+from django.template import TemplateDoesNotExist
+from django.template.loader import select_template
 
 from cms.plugin_base import CMSPluginBase
 from cms.plugin_pool import plugin_pool
 
 from djangocms_bootstrap4.helpers import concat_classes
 
-from .forms import Bootstrap4CodeForm
+from .forms import Bootstrap4CodeForm, BootstrapBlockquoteForm
 from .models import Bootstrap4Code, Bootstrap4Blockquote, Bootstrap4Figure
 from .constants import HIDE_BLACKQUOTE_ALIGNMENT
 
@@ -51,8 +53,10 @@ class Bootstrap4BlockquotePlugin(CMSPluginBase):
     model = Bootstrap4Blockquote
     name = _('Blockquote')
     module = _('Bootstrap 4')
+    TEMPLATE_NAME = 'djangocms_bootstrap4/blockquote_%s.html'
     render_template = 'djangocms_bootstrap4/blockquote.html'
     change_form_template = 'djangocms_bootstrap4/admin/blockquote.html'
+    form = BootstrapBlockquoteForm
     text_enabled = True
 
     main_fields = (
@@ -63,6 +67,9 @@ class Bootstrap4BlockquotePlugin(CMSPluginBase):
         main_fields += (
             'quote_alignment',
         )
+    main_fields += (
+        'layout',
+    )
 
     fieldsets = [
         (None, {
@@ -89,6 +96,16 @@ class Bootstrap4BlockquotePlugin(CMSPluginBase):
             context, instance, placeholder
         )
 
+    def get_render_template(self, context, instance, placeholder):
+        layout = instance.layout
+        if layout:
+            template = self.TEMPLATE_NAME % layout
+            try:
+                select_template([template])
+                return template
+            except TemplateDoesNotExist:
+                pass
+        return self.render_template
 
 class Bootstrap4FigurePlugin(CMSPluginBase):
     """

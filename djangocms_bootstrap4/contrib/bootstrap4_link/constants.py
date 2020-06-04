@@ -28,9 +28,15 @@ SHOW_BUTTON_CONTEXT = getattr(
     False,
 )
 
+ENABLE_BUTTON_COLORPICKER = getattr(
+    settings,
+    'DJANGOCMS_BOOTSTRAP4_ENABLE_BUTTON_COLORPICKER',
+    False,
+)
+
 LINK_ALIGNMENTS = (
     ('', _('None')),
     ('text-left', _('Left')),
-    ('text-centre', _('Center')),
+    ('text-center', _('Center')),
     ('text-right', _('Right')),
 )

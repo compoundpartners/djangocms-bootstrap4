@@ -4,13 +4,13 @@ from __future__ import unicode_literals
 
 from django.db import migrations
 import django.db.models.deletion
-import js_components.models
+#import js_components.models
 
 
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('js_components', '0013_video'),
+        #('js_components', '0013_video'),
         ('bootstrap4_carousel', '0008_auto_20190604_1547'),
     ]
 
@@ -19,9 +19,9 @@ class Migration(migrations.Migration):
             model_name='bootstrap4carouselslide',
             name='carousel_video_url',
         ),
-        migrations.AlterField(
-            model_name='bootstrap4carouselslide',
-            name='carousel_video',
-            field=js_components.models.FilerVideoField(blank=True, help_text='Use MP4 videos', null=True, on_delete=django.db.models.deletion.SET_NULL, related_name='+', to='js_components.Video', verbose_name='Slide video background'),
-        ),
+        #migrations.AlterField(
+            #model_name='bootstrap4carouselslide',
+            #name='carousel_video',
+            #field=js_components.models.FilerVideoField(blank=True, help_text='Use MP4 videos', null=True, on_delete=django.db.models.deletion.SET_NULL, related_name='+', to='js_components.Video', verbose_name='Slide video background'),
+        #),
     ]

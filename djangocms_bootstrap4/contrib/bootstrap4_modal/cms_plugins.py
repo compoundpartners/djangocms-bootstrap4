@@ -41,6 +41,9 @@ class Bootstrap4ModalPlugin(CMSPluginBase):
                 'title',
                 'modal_id',
                 'layout',
+                'percentage_scrolled',
+                'seconds_passed',
+                'cookie_settings',
                 'attributes',
             )
         }),

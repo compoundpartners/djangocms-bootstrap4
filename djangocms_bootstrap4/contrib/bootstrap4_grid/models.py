@@ -70,7 +70,7 @@ class Bootstrap4GridRow(CMSPlugin):
     """
     layout = models.CharField(
         verbose_name=_('Layout'),
-        choices=GRID_ROW_LAYOUT_CHOICES,
+        #choices=GRID_ROW_LAYOUT_CHOICES,
         blank=True,
         max_length=255,
         help_text=_('Select a layout'),
@@ -168,7 +168,7 @@ class Bootstrap4GridColumn(CMSPlugin):
     """
     layout = models.CharField(
         verbose_name=_('Layout'),
-        choices=GRID_COL_LAYOUT_CHOICES,
+        #choices=GRID_COL_LAYOUT_CHOICES,
         blank=True,
         max_length=255,
         help_text=_('Select a layout'),

@@ -68,6 +68,13 @@ class Bootstrap4Blockquote(CMSPlugin):
         blank=True,
         max_length=255,
     )
+    layout = models.CharField(
+        verbose_name=_('Layout'),
+        default='',
+        blank=True,
+        max_length=255,
+        help_text=_('Select a layout'),
+    )
     attributes = AttributesField()
 
     def __str__(self):

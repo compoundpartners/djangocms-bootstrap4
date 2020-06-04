@@ -9,6 +9,7 @@ from cms.plugin_base import CMSPluginBase
 from cms.plugin_pool import plugin_pool
 
 from djangocms_link.cms_plugins import LinkPlugin
+from djangocms_link.fields import PageSearchField
 from djangocms_bootstrap4.helpers import concat_classes, get_plugin_template
 
 from .models import Bootstrap4Carousel, Bootstrap4CarouselSlide
@@ -31,6 +32,22 @@ class Bootstrap4CarouselForm(forms.ModelForm):
 class Bootstrap4CarouselSlideForm(forms.ModelForm):
 
     carousel_style = forms.ChoiceField(choices=CAROUSEL_SLIDE_TEMPLATE_CHOICES, required=False)
+    internal_link = PageSearchField(
+        label=_('Internal link'),
+        required=False,
+    )
+
+    def for_site(self, site):
+        # override the internal_link fields queryset to contains just pages for
+        # current site
+        # this will work for PageSelectFormField
+        from cms.models import Page
+        self.fields['internal_link'].queryset = Page.objects.drafts().on_site(site)
+        # set the current site as a internal_link field instance attribute
+        # this will be used by the field later to properly set up the queryset
+        # this will work for PageSearchField
+        self.fields['internal_link'].site = site
+        self.fields['internal_link'].widget.site = site
 
     class Meta:
         model = Bootstrap4CarouselSlide
@@ -47,13 +64,19 @@ class Bootstrap4CarouselPlugin(CMSPluginBase):
     name = _('Carousel')
     module = _('Bootstrap 4')
     allow_children = True
-    child_classes = ['Bootstrap4CarouselSlidePlugin']
+    child_classes = [
+        'Bootstrap4CarouselSlidePlugin',
+        'Bootstrap4BlockquotePlugin',
+        'PromoUnitPlugin',
+    ]
     form = Bootstrap4CarouselForm
 
     fieldsets = [
         (None, {
             'fields': (
+                'carousel_title',
                 'carousel_style',
+                'carousel_background_image',
                 ('carousel_interval', 'full_width'),
                 ('carousel_controls', 'carousel_indicators'),
                 ('carousel_keyboard', 'carousel_wrap'),
