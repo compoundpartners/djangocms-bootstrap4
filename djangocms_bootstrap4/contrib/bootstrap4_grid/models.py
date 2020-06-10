@@ -118,6 +118,11 @@ class Bootstrap4GridRow(CMSPlugin):
         blank=True,
         related_name='row_bg_image'
     )
+    background_video = models.CharField(
+        verbose_name=_('Background Video'),
+        blank=True,
+        max_length=255,
+    )
     parallax = models.BooleanField(
         verbose_name=_('Parallax'),
         default=False,
@@ -239,13 +244,23 @@ class Bootstrap4GridColumn(CMSPlugin):
 
     def get_grid_values(self):
         classes = []
+        hide = False
         for device in DEVICE_SIZES:
-            for element in ('col', 'order', 'ml', 'mr'):
+            for element in ('col', 'order', 'ml', 'mr', 'hide'):
                 size = getattr(self, '{}_{}'.format(device, element))
                 if size and (element == 'col' or element == 'order'):
                     classes.append('{}-{}-{}'.format(element, device, int(size)))
                 elif size:
-                    classes.append('{}-{}-{}'.format(element, device, 'auto'))
+                    if element == 'hide':
+                        classes.append('{}-{}-{}'.format('d', device, 'none'))
+                        hide = True
+                    else:
+                        classes.append('{}-{}-{}'.format(element, device, 'auto'))
+                else:
+                    if hide and element == 'hide':
+                        classes.append('{}-{}-{}'.format('d', device, 'block'))
+                        hide = False
+
         return classes
 
 
@@ -282,5 +297,10 @@ for size in DEVICE_SIZES:
     # Grid margin right (ml)
     Bootstrap4GridColumn.add_to_class(
         '{}_mr'.format(size),
+        BooleanFieldPartial(),
+    )
+    # hide
+    Bootstrap4GridColumn.add_to_class(
+        '{}_hide'.format(size),
         BooleanFieldPartial(),
     )

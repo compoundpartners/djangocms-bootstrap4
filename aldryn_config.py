@@ -42,6 +42,11 @@ class Form(forms.BaseForm):
         required=False,
         initial=True,
     )
+    enable_row_bg_video = forms.CheckboxField(
+        'Enable row background Video',
+        required=False,
+        initial=False,
+    )
     enable_row_icon = forms.CheckboxField(
         'Enable row icon',
         required=False,
@@ -120,6 +125,9 @@ class Form(forms.BaseForm):
 
         if data['enable_row_bg_image']:
             settings['DJANGOCMS_BOOTSTRAP4_USE_ROW_BG_IMAGE'] = int(data['enable_row_bg_image'])
+
+        if data['enable_row_bg_video']:
+            settings['DJANGOCMS_BOOTSTRAP4_USE_ROW_BG_VIDEO'] = int(data['enable_row_bg_video'])
 
         if data['enable_row_icon']:
             settings['DJANGOCMS_BOOTSTRAP4_USE_ROW_ICON'] = int(data['enable_row_icon'])

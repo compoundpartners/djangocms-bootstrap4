@@ -22,6 +22,7 @@ from .forms import (
 from .constants import(
     GRID_USE_ROW_BG_COLOR,
     GRID_USE_ROW_BG_IMAGE,
+    GRID_USE_ROW_BG_VIDEO,
     GRID_USE_ROW_ICON,
     GRID_USE_ROW_ALIGNMENT,
     GRID_USE_ROW_TAG_TYPE,
@@ -105,6 +106,10 @@ class Bootstrap4GridRowPlugin(CMSPluginBase):
     if GRID_USE_ROW_BG_IMAGE:
         main_fields +=(
             ('background_image', 'parallax'),
+        )
+    if GRID_USE_ROW_BG_VIDEO:
+        main_fields +=(
+            'background_video',
         )
     if GRID_USE_ROW_ICON:
         main_fields +=(
@@ -228,6 +233,7 @@ class Bootstrap4GridColumnPlugin(CMSPluginBase):
                 ['{}_order'.format(size) for size in DEVICE_SIZES],
                 ['{}_ml'.format(size) for size in DEVICE_SIZES],
                 ['{}_mr'.format(size) for size in DEVICE_SIZES],
+                ['{}_hide'.format(size) for size in DEVICE_SIZES],
             )
         }),
         (_('Advanced settings'), {
