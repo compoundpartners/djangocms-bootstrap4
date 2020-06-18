@@ -244,7 +244,7 @@ class Bootstrap4GridColumn(CMSPlugin):
 
     def get_grid_values(self):
         classes = []
-        hide = False
+        hide = True
         for device in DEVICE_SIZES:
             for element in ('col', 'order', 'ml', 'mr', 'hide'):
                 size = getattr(self, '{}_{}'.format(device, element))
@@ -252,13 +252,19 @@ class Bootstrap4GridColumn(CMSPlugin):
                     classes.append('{}-{}-{}'.format(element, device, int(size)))
                 elif size:
                     if element == 'hide':
-                        classes.append('{}-{}-{}'.format('d', device, 'none'))
+                        if device == 'xs':
+                            classes.append('{}-{}'.format('d', 'none'))
+                        else:
+                            classes.append('{}-{}-{}'.format('d', device, 'none'))
                         hide = True
                     else:
                         classes.append('{}-{}-{}'.format(element, device, 'auto'))
                 else:
                     if hide and element == 'hide':
-                        classes.append('{}-{}-{}'.format('d', device, 'block'))
+                        if device == 'xs':
+                            classes.append('{}-{}'.format('d', 'block'))
+                        else:
+                            classes.append('{}-{}-{}'.format('d', device, 'block'))
                         hide = False
 
         return classes
