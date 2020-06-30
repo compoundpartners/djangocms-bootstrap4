@@ -1,7 +1,11 @@
 # -*- coding: utf-8 -*-
 from __future__ import unicode_literals
 
+from django import forms
 from django.conf import settings
+from django.template import TemplateDoesNotExist
+from django.template.loader import select_template
+from django.utils.text import slugify
 from django.utils.translation import ugettext_lazy as _
 
 from cms.plugin_base import CMSPluginBase
@@ -15,6 +19,20 @@ from .models import (
     Bootstrap4CollapseContainer,
 )
 
+COLLAPSE_LAYOUTS = getattr(
+    settings,
+    'DJANGOCMS_BOOTSTRAP4_COLLAPSE_LAYOUTS',
+    (),
+)
+
+COLLAPSE_LAYOUT_CHOICES = COLLAPSE_LAYOUTS
+if len(COLLAPSE_LAYOUT_CHOICES) == 0 or len(COLLAPSE_LAYOUT_CHOICES[0]) != 2:
+    COLLAPSE_LAYOUT_CHOICES = zip(list(map(lambda s: slugify(s).replace('-', '_'), ('',) + tuple(COLLAPSE_LAYOUTS))), ('default',) + tuple(COLLAPSE_LAYOUTS))
+
+
+class CollapsePluginForm(forms.ModelForm):
+    layout = forms.ChoiceField(choices=COLLAPSE_LAYOUT_CHOICES, required=False)
+
 
 class Bootstrap4CollapsePlugin(CMSPluginBase):
     """
@@ -22,9 +40,11 @@ class Bootstrap4CollapsePlugin(CMSPluginBase):
     https://getbootstrap.com/docs/4.0/components/collapse/
     """
     model = Bootstrap4Collapse
+    form = CollapsePluginForm
     name = _('Collapse')
     module = _('Bootstrap 4')
     render_template = 'djangocms_bootstrap4/collapse.html'
+    TEMPLATE_NAME = 'djangocms_bootstrap4/collapse_%s.html'
     change_form_template = 'djangocms_bootstrap4/admin/collapse.html'
     allow_children = True
     child_classes = [
@@ -41,12 +61,24 @@ class Bootstrap4CollapsePlugin(CMSPluginBase):
         (_('Advanced settings'), {
             'classes': ('collapse',),
             'fields': (
+                'layout',
                 'siblings',
                 'tag_type',
                 'attributes',
             )
         }),
     ]
+
+    def get_render_template(self, context, instance, placeholder):
+        layout = instance.layout
+        if layout:
+            template = self.TEMPLATE_NAME % layout
+            try:
+                select_template([template])
+                return template
+            except TemplateDoesNotExist:
+                pass
+        return self.render_template
 
 
 class Bootstrap4CollapseTriggerPlugin(CMSPluginBase):

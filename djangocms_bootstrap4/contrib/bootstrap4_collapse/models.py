@@ -22,6 +22,12 @@ class Bootstrap4Collapse(CMSPlugin):
     Component > "Collapse" Plugin
     https://getbootstrap.com/docs/4.0/components/collapse/
     """
+    layout = models.CharField(
+        verbose_name=_('Layout'),
+        blank=True,
+        max_length=255,
+        help_text=_('Select a layout'),
+    )
     siblings = models.CharField(
         verbose_name=_('Siblings'),
         default='.card',
