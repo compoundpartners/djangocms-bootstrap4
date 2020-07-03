@@ -2,6 +2,8 @@
 from __future__ import unicode_literals
 
 from django.conf import settings
+from django.template import TemplateDoesNotExist
+from django.template.loader import select_template
 from django.utils.translation import ugettext_lazy as _
 
 from cms.plugin_base import CMSPluginBase
@@ -84,10 +86,15 @@ class Bootstrap4GridRowPlugin(CMSPluginBase):
     render_template = 'djangocms_bootstrap4/grid_row.html'  # The default fallback template
     TEMPLATE_NAME = 'djangocms_bootstrap4/grid_row{separator}{variant}.html'
     def get_render_template(self, context, instance, placeholder):
-        separator = ''
         if instance.layout:
             separator = '__'
-        return self.TEMPLATE_NAME.format(separator=separator, variant=instance.layout)
+            template = self.TEMPLATE_NAME.format(separator=separator, variant=instance.layout)
+            try:
+                select_template([template])
+                return template
+            except TemplateDoesNotExist:
+                pass
+        return self.render_template
     # End template handling
 
     allow_children = True
@@ -271,7 +278,13 @@ class Bootstrap4GridColumnPlugin(CMSPluginBase):
         separator = ''
         if instance.layout:
             separator = '__'
-        return self.TEMPLATE_NAME.format(separator=separator, variant=instance.layout)
+            template = self.TEMPLATE_NAME.format(separator=separator, variant=instance.layout)
+            try:
+                select_template([template])
+                return template
+            except TemplateDoesNotExist:
+                pass
+        return self.render_template
 
 plugin_pool.register_plugin(Bootstrap4GridContainerPlugin)
 plugin_pool.register_plugin(Bootstrap4GridRowPlugin)
