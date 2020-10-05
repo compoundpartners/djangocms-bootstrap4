@@ -143,6 +143,12 @@ class Bootstrap4GridRowPlugin(CMSPluginBase):
         (None, {
             'fields': main_fields,
         }),
+        (_('Responsive settings'), {
+            'classes': ('collapse',),
+            'fields': (
+                ['{}_hide'.format(size) for size in DEVICE_SIZES],
+            )
+        }),
         (_('Advanced settings'), {
             'classes': ('collapse',),
             'fields': advanced_fields,
@@ -172,7 +178,26 @@ class Bootstrap4GridRowPlugin(CMSPluginBase):
         gutter = 'no-gutters' if instance.gutters else ''
         parallax = 'parallax' if instance.parallax else ''
         full_width = 'full-width' if instance.full_width else ''
-        classes = concat_classes([
+        classes = []
+        hide = []
+        show = None
+        for device in DEVICE_SIZES:
+            value = getattr(instance, '{}_hide'.format(device))
+            if value:
+                hide.append(device)
+            elif hide:
+                if 'xs' in hide:
+                  classes.append('{}-{}'.format('d', 'none'))
+                else:
+                  classes.append('{}-{}-{}'.format('d', hide[-1], 'none'))
+                classes.append('{}-{}-{}'.format('d', device, 'block'))
+                show = device
+                hide = []
+        if len(hide) == len(DEVICE_SIZES):
+            classes.append('{}-{}'.format('d', 'none'))
+        elif 'xl' in hide:
+            classes.append('d-xl-none')
+        classes = concat_classes(classes + [
             'row',
             instance.vertical_alignment,
             instance.horizontal_alignment,

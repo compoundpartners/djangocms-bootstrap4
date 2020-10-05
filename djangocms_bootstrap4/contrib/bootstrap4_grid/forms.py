@@ -15,7 +15,7 @@ from .constants import (
 from .models import Bootstrap4GridRow, Bootstrap4GridColumn
 
 
-class Bootstrap4GridRowForm(models.ModelForm):
+class Bootstrap4GridRowBaseForm(models.ModelForm):
     create = IntegerField(
         label=_('Create columns'),
         help_text=_('Number of columns to create when saving.'),
@@ -61,9 +61,24 @@ for size in DEVICE_SIZES:
         label='mr-{}-auto'.format(size),
         required=False,
     )
+    extra_fields_column['{}_hide'.format(size)] = BooleanField(
+        label='hide {}'.format(size),
+        required=False,
+    )
+extra_fields_row = {}
+for size in DEVICE_SIZES:
+    extra_fields_row['{}_hide'.format(size)] = BooleanField(
+        label='hide {}'.format(size),
+        required=False,
+    )
 
 Bootstrap4GridColumnForm = type(
     str('Bootstrap4GridColumnBaseForm'),
     (Bootstrap4GridColumnBaseForm,),
     extra_fields_column,
+)
+Bootstrap4GridRowForm = type(
+    str('Bootstrap4GridColumnBaseForm'),
+    (Bootstrap4GridRowBaseForm,),
+    extra_fields_row,
 )

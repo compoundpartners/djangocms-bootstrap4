@@ -310,3 +310,7 @@ for size in DEVICE_SIZES:
         '{}_hide'.format(size),
         BooleanFieldPartial(),
     )
+    Bootstrap4GridRow.add_to_class(
+        '{}_hide'.format(size),
+        BooleanFieldPartial(),
+    )
