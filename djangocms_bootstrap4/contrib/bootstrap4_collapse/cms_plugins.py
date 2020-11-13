@@ -96,6 +96,7 @@ class Bootstrap4CollapseTriggerPlugin(CMSPluginBase):
         'Bootstrap4CardInnerPlugin',
         'Bootstrap4CollapsePlugin',
         'Bootstrap4GridColumnPlugin',
+        'Bootstrap4BoxoutPlugin',
     ]
 
     fieldsets = [
@@ -129,6 +130,7 @@ class Bootstrap4CollapseContainerPlugin(CMSPluginBase):
         'Bootstrap4CardInnerPlugin',
         'Bootstrap4CollapsePlugin',
         'Bootstrap4GridColumnPlugin',
+        'Bootstrap4BoxoutPlugin',
     ]
 
     fieldsets = [
