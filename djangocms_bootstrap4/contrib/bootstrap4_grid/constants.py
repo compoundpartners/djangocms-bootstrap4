@@ -42,9 +42,9 @@ GRID_ROW_HORIZONTAL_ALIGNMENT_CHOICES = (
 )
 
 GRID_COLUMN_ALIGNMENT_CHOICES = (
-    ('align-self-start', _('Align self start')),
-    ('align-self-center', _('Align self center')),
-    ('align-self-end', _('Align self end')),
+    ('align-self-start', _('Left')),
+    ('align-self-center', _('Center')),
+    ('align-self-end', _('Right')),
 )
 
 GRID_COLUMN_CHOICES = getattr(
