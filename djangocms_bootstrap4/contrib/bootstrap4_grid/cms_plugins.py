@@ -199,10 +199,16 @@ class Bootstrap4GridRowPlugin(CMSPluginBase):
             instance.attributes.get('class'),
         ])
         instance.attributes['class'] = classes
-        if instance.background_color or instance.background_image:
-            color_str = ' %s' % instance.background_color if instance.background_color else ''
-            img_str = ' url(%s)' % instance.background_image.url if instance.background_image else ''
-            instance.attributes['style'] = 'background:%s%s;' % (color_str, img_str)
+
+        styles = instance.attributes.get('style', '').split(' ')
+        background = []
+        if instance.background_color:
+            background.append(instance.background_color)
+        if instance.background_image:
+            background.append('url(%s)' % instance.background_image.url)
+        if background:
+            styles.append('background: %s;' % ' '.join(background))
+        instance.attributes['style'] = ' '.join(styles)
 
         return super(Bootstrap4GridRowPlugin, self).render(
             context, instance, placeholder
@@ -282,10 +288,16 @@ class Bootstrap4GridColumnPlugin(CMSPluginBase):
             instance.attributes.get('class'),
         ])
         instance.attributes['class'] = attr_classes
-        if instance.background_color or instance.background_image:
-            color_str = ' %s' % instance.background_color if instance.background_color else ''
-            img_str = ' url(%s)' % instance.background_image.url if instance.background_image else ''
-            instance.attributes['style'] = 'background:%s%s;' % (color_str, img_str)
+
+        styles = instance.attributes.get('style', '').split(' ')
+        background = []
+        if instance.background_color:
+            background.append(instance.background_color)
+        if instance.background_image:
+            background.append('url(%s)' % instance.background_image.url)
+        if background:
+            styles.append('background: %s;' % ' '.join(background))
+        instance.attributes['style'] = ' '.join(styles)
 
         return super(Bootstrap4GridColumnPlugin, self).render(
             context, instance, placeholder

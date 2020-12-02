@@ -174,8 +174,12 @@ class Bootstrap4CarouselSlidePlugin(CMSPluginBase):
             'size': (width, height),
             'upscale': True
         }
+
+        styles = instance.attributes.get('style', '').split(' ')
         if instance.background_color:
-            instance.attributes['style'] = 'background-color: %s;' % instance.background_color
+            styles.append('background: %s;' % instance.background_color)
+        instance.attributes['style'] = ' '.join(styles)
+
         return context
 
     def get_render_template(self, context, instance, placeholder):

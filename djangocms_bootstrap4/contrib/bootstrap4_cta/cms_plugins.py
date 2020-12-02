@@ -69,8 +69,11 @@ class Bootstrap4CtaPlugin(CMSPluginBase):
             instance.attributes.get('class'),
         ])
         instance.attributes['class'] = classes
+
+        styles = instance.attributes.get('style', '').split(' ')
         if instance.background_color:
-            instance.attributes['style'] = 'background: %s;' % instance.background_color
+            styles.append('background: %s;' % instance.background_color)
+        instance.attributes['style'] = ' '.join(styles)
 
         return super(Bootstrap4CtaPlugin, self).render(
             context, instance, placeholder
