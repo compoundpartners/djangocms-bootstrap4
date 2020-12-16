@@ -31,6 +31,8 @@ from .constants import(
     GRID_USE_ROW_GUTTER,
     GRID_USE_COL_BG_COLOR,
     GRID_USE_COL_BG_IMAGE,
+    ADDITIONAL_CHILD_CLASSES,
+    ADDITIONAL_PARENT_CLASSES,
 )
 
 class Bootstrap4GridContainerPlugin(CMSPluginBase):
@@ -98,7 +100,7 @@ class Bootstrap4GridRowPlugin(CMSPluginBase):
     # End template handling
 
     allow_children = True
-    child_classes = ['Bootstrap4GridColumnPlugin']
+    child_classes = ['Bootstrap4GridColumnPlugin'] + ADDITIONAL_CHILD_CLASSES.get('Bootstrap4GridRowPlugin', [])
 
     main_fields = (
         'layout',
@@ -231,7 +233,7 @@ class Bootstrap4GridColumnPlugin(CMSPluginBase):
     require_parent = True
     # TODO it should allow for the responsive utilitiy class
     # https://getbootstrap.com/docs/4.0/layout/grid/#column-resets
-    parent_classes = ['Bootstrap4GridRowPlugin']
+    parent_classes = ['Bootstrap4GridRowPlugin'] + ADDITIONAL_PARENT_CLASSES.get('Bootstrap4GridColumnPlugin', [])
 
     advanced_fields = (
         'tag_type',

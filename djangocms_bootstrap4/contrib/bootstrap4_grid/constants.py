@@ -112,3 +112,14 @@ GRID_COL_LAYOUT_CHOICES = getattr(
     'GRID_COL_LAYOUT_CHOICES',
     (('', _('Configure this list in settings (GRID_COL_LAYOUT_CHOICES)')),)
 )
+
+ADDITIONAL_CHILD_CLASSES = getattr(
+    settings,
+    'GRID_ADDITIONAL_CHILD_CLASSES',
+    {},
+)
+ADDITIONAL_PARENT_CLASSES = getattr(
+    settings,
+    'GRID_ADDITIONAL_PARENT_CLASSES',
+    {},
+)
